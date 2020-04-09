@@ -277,6 +277,7 @@ int send_image(int & fd, std::string& image){
 //https://stackoverflow.com/questions/45670369/c-web-server-image-not-showing-up-on-browser
 //http://www.tldp.org/LDP/LG/issue91/tranter.html
 //https://linux.die.net/man/2/fstat
+//http://man7.org/linux/man-pages/man2/stat.2.html
 int send_image1(int & fd, char image_path[]){
 
     /*
@@ -289,13 +290,18 @@ int send_image1(int & fd, char image_path[]){
     write(fd, imageheader, sizeof(imageheader) - 1);
 
     int fdimg = open(image_path, O_RDONLY);
+     
+
     fstat(fdimg, &stat_buf);
-    printf("image total byte: %d\n", stat_buf.st_mode);
-    int sent = sendfile(fd, fdimg, NULL, stat_buf.st_mode);
-    printf("image total byte: %d, image byte sent: %d \n", stat_buf.st_mode, sent);
-    close(fdimg);
+    int img_total_size = stat_buf.st_size;
+    int block_size = stat_buf.st_blksize;
+    //printf("image block size: %d\n", stat_buf.st_blksize);  
+    printf("image total byte st_size: %d\n", stat_buf.st_size);
 
-   
+    while(img_total_size > 0){
+        sendfile(fd, fdimg, NULL, block_size);
+        img_total_size = img_total_size - block_size;
+    }
+    close(fdimg);   
 }
-
 
