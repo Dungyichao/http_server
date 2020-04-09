@@ -33,7 +33,7 @@
 #include <arpa/inet.h>
 #include <sys/types.h>
 
-#define PORT 8080
+#define PORT 8081
 void setHttpHeader(char httpHeader[]);
 void setHttpHeader_other(char httpHeader[], char *path);
 void report(struct sockaddr_in *serverAddress);
@@ -46,7 +46,9 @@ int main(int argc, char const *argv[])
     int addrlen = sizeof(address);
     
     char httpHeader[100000] = "HTTP/1.1 200 OK\r\n\n";
-    char httpHeader1[3800000] = "HTTP/1.1 200 OK\r\n\n";
+    //char httpHeader1[800000] = "HTTP/1.1 200 OK\r\n\n";
+    
+    
     
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
@@ -93,22 +95,28 @@ int main(int argc, char const *argv[])
         
         //printf("%s\n",buffer );
         
-        char *parse_string = parse(buffer);
-        printf("path: %s\n", parse_string);
+        char httpHeader1[800000] = "HTTP/1.1 200 OK\r\n\n";
+
+        char *parse_string = parse(buffer);  //Try to get the path which the client ask for
+        printf("Client ask for path: %s\n", parse_string);
+
+        
         if(strlen(parse_string) <= 1){
+            //case that the parse_string = "/"
             write(new_socket , httpHeader , strlen(httpHeader));
             printf("\n Send index.html file \n");
         }
         else{
             setHttpHeader_other(httpHeader1, parse_string);
+            //char *httpHeader1 = setHttpHeader_other_try(parse_string);
             write(new_socket , httpHeader1 , strlen(httpHeader1));
-            printf("\n Send other file, size: %d \n", strlen(httpHeader1));
-            printf("%s", httpHeader1);
+            printf("\n Send other file, total size: %d \n", strlen(httpHeader1));
+    
+            //printf("%s", httpHeader1);
         }
         //printf("This is the pathe: %s", parse_path);
-        printf("------------------Server sent-------------------\n");
+        printf("------------------Server sent----------------------------------------------------\n");
         close(new_socket);
-        //free(parse_string);
     }
     return 0;
 }
@@ -118,9 +126,7 @@ void setHttpHeader(char httpHeader[])
     
     // File object to return
     
-    FILE *htmlData = fopen("inde.html", "r");
-    //FILE *htmlData = fopen("./img/inde.html", "r");
-
+    FILE *htmlData = fopen("index.html", "r");
 
     char line[100];
     char responseData[1000000];
@@ -146,24 +152,39 @@ void setHttpHeader_other(char httpHeader[], char *path)
     char path_head[500] = ".";
     strcat(path_head, path);
     printf("\n path head : %s", path_head);
+    //printf("\n Length of httpheader: %d", strlen(httpHeader));
     
     FILE *htmlData1 = fopen(path_head, "r");
 
     ////char httpHeader1[8000] = "HTTP/1.1 200 OK\r\n\n";
+    int n = 0;
+    int size_data = 800000;
     char line[100];
-    char responseData[3800000];
+
+    char *responseData;
+    responseData = (char*)malloc(size_data * sizeof(char));  
+    //https://stackoverflow.com/questions/5099669/invalid-conversion-from-void-to-char-when-using-malloc/5099675
+    //printf("\n Beginning response array size: %d \n", strlen(responseData));  
+
     if(htmlData1){
+        
         while (fgets(line, 100, htmlData1) != 0 ) {
             strcat(responseData, line);
+            n++;
         }
         strcat(httpHeader, responseData);
         fclose(htmlData1);
+        printf("\n read %d time and Length of file: %d", n, strlen(responseData));
+        //free(responseData);
+        
     }
     else
     {
         printf("\n Read other file problem");
     }
+    //delete[] responseData;
 }
+
 
 void report(struct sockaddr_in *serverAddress)
 {
@@ -187,17 +208,11 @@ void report(struct sockaddr_in *serverAddress)
 
 char* parse(char line[])
 {
-    //char *path;
     char *message;
     char * token = strtok(line, " ");
     int current = 0;
-    
-    message = "No path";
-    printf("token--------------------\n");
+
     while( token != NULL ) {
-      if(current < 2){
-          printf( " %s\n", token ); //printing each token
-      }
       
       token = strtok(NULL, " ");
       if(current == 0){
@@ -207,7 +222,7 @@ char* parse(char line[])
       current = current + 1;
       
    }
+   printf("arrive here");
    return message;
     
 }
-
