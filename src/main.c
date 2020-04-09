@@ -1,26 +1,3 @@
-/*
- * main.c
- * 
- * Copyright 2020  <pi@raspberrypi>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- * 
- * 
- */
-
 // Server side C program to demonstrate Socket programming
 #include <stdio.h>
 #include <sys/socket.h>
@@ -33,11 +10,33 @@
 #include <arpa/inet.h>
 #include <sys/types.h>
 
-#define PORT 8081
+#include <unistd.h>
+#include <string>
+#include <fstream>
+#include <sstream>
+
+#include <fcntl.h>
+#include <sys/sendfile.h>
+#include <sys/stat.h>
+using namespace std;
+
+#define PORT 8080
+
 void setHttpHeader(char httpHeader[]);
 void setHttpHeader_other(char httpHeader[], char *path);
 void report(struct sockaddr_in *serverAddress);
 char* parse(char line[]);
+char* parse1(char line[]);
+std::string read_image(const std::string& image_path);
+int send_image(int & fd, std::string& image);
+int send_image1(int & fd, char image_path[]);
+
+
+//https://stackoverflow.com/questions/45670369/c-web-server-image-not-showing-up-on-browser
+char imageheader[] = 
+"HTTP/1.1 200 Ok\r\n"
+"Content-Type: image/jpeg\r\n\r\n";
+
 
 int main(int argc, char const *argv[])
 {
@@ -64,9 +63,7 @@ int main(int argc, char const *argv[])
     
     memset(address.sin_zero, '\0', sizeof address.sin_zero);
     
-    
-    
-    
+       
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address))<0)
     {
         perror("In bind");
@@ -80,6 +77,7 @@ int main(int argc, char const *argv[])
     
     //report(&address);
     setHttpHeader(httpHeader);
+    int write_ok;
     
     while(1)
     {
@@ -93,28 +91,37 @@ int main(int argc, char const *argv[])
         char buffer[30000] = {0};
         valread = read( new_socket , buffer, 30000);
         
-        //printf("%s\n",buffer );
-        
         char httpHeader1[800000] = "HTTP/1.1 200 OK\r\n\n";
 
         char *parse_string = parse(buffer);  //Try to get the path which the client ask for
         printf("Client ask for path: %s\n", parse_string);
 
-        
+        //prevent strtok from changing the string
+        //https://wiki.sei.cmu.edu/confluence/display/c/STR06-C.+Do+not+assume+that+strtok%28%29+leaves+the+parse+string+unchanged
+        char *copy = (char *)malloc(strlen(parse_string) + 1);
+        strcpy(copy, parse_string);
+        char *parse_ext = parse1(copy);  // get the file extension such as JPG, jpg
+
         if(strlen(parse_string) <= 1){
-            //case that the parse_string = "/"
+            //case that the parse_string = "/"  --> Send index.html file
             write(new_socket , httpHeader , strlen(httpHeader));
-            printf("\n Send index.html file \n");
+        }
+        else if ((parse_ext[0] == 'j' && parse_ext[1] == 'p' && parse_ext[2] == 'g') || (parse_ext[0] == 'J' && parse_ext[1] == 'P' && parse_ext[2] == 'G'))
+        {
+            //send image to client
+            char path_head[500] = ".";
+            strcat(path_head, parse_string);
+            //std::string img = read_image(path_head);
+            //write_ok = send_image(new_socket, img);
+
+            send_image1(new_socket, path_head);
         }
         else{
+            //send other file such as .css, .html and so on
             setHttpHeader_other(httpHeader1, parse_string);
-            //char *httpHeader1 = setHttpHeader_other_try(parse_string);
             write(new_socket , httpHeader1 , strlen(httpHeader1));
             printf("\n Send other file, total size: %d \n", strlen(httpHeader1));
-    
-            //printf("%s", httpHeader1);
         }
-        //printf("This is the pathe: %s", parse_path);
         printf("------------------Server sent----------------------------------------------------\n");
         close(new_socket);
     }
@@ -122,8 +129,7 @@ int main(int argc, char const *argv[])
 }
 
 void setHttpHeader(char httpHeader[])
-{
-    
+{   
     // File object to return
     
     FILE *htmlData = fopen("index.html", "r");
@@ -145,8 +151,7 @@ void setHttpHeader(char httpHeader[])
 }
 
 void setHttpHeader_other(char httpHeader[], char *path)
-{
-    
+{  
     // File object to return
     
     char path_head[500] = ".";
@@ -163,8 +168,7 @@ void setHttpHeader_other(char httpHeader[], char *path)
 
     char *responseData;
     responseData = (char*)malloc(size_data * sizeof(char));  
-    //https://stackoverflow.com/questions/5099669/invalid-conversion-from-void-to-char-when-using-malloc/5099675
-    //printf("\n Beginning response array size: %d \n", strlen(responseData));  
+    //https://stackoverflow.com/questions/5099669/invalid-conversion-from-void-to-char-when-using-malloc/5099675 
 
     if(htmlData1){
         
@@ -175,8 +179,7 @@ void setHttpHeader_other(char httpHeader[], char *path)
         strcat(httpHeader, responseData);
         fclose(htmlData1);
         printf("\n read %d time and Length of file: %d", n, strlen(responseData));
-        //free(responseData);
-        
+        //free(responseData);      
     }
     else
     {
@@ -226,3 +229,73 @@ char* parse(char line[])
    return message;
     
 }
+
+char* parse1(char line[])
+{
+    char *message;
+    char * token = strtok(line, ".");
+    int current = 0;
+
+    while( token != NULL ) {
+      
+      token = strtok(NULL, " ");
+      if(current == 0){
+          message = token;
+          return message;
+      }
+      current = current + 1;
+      
+   }
+   printf("arrive here");
+   return message;
+    
+}
+
+std::string read_image(const std::string& image_path){
+    std::ifstream is(image_path.c_str(), std::ifstream::in);
+    is.seekg(0, is.end);
+    int flength = is.tellg();
+    is.seekg(0, is.beg);
+    char * buffer = new char[flength];
+    is.read(buffer, flength);
+    std::string image(buffer, flength);
+    return image;
+}
+
+int send_image(int & fd, std::string& image){
+
+    int body_length = image.size();
+    const char * body = image.data();
+    int response_length = body_length;
+    char * buffer = new char[response_length];
+    memcpy(buffer, body, body_length);
+
+    int ret = write(fd, buffer, response_length);
+
+    delete [] buffer;
+    return ret;
+}
+
+
+//https://stackoverflow.com/questions/45670369/c-web-server-image-not-showing-up-on-browser
+//http://www.tldp.org/LDP/LG/issue91/tranter.html
+//https://linux.die.net/man/2/fstat
+int send_image1(int & fd, char image_path[]){
+
+    /*
+    char imageheader[] = 
+    "HTTP/1.1 200 Ok\r\n"
+    "Content-Type: image/jpeg\r\n\r\n";
+    */
+    struct stat stat_buf;  /* hold information about input file */
+
+    write(fd, imageheader, sizeof(imageheader) - 1);
+
+    int fdimg = open(image_path, O_RDONLY);
+    fstat(fdimg, &stat_buf);
+    int sent = sendfile(fd, fdimg, NULL, stat_buf.st_mode);
+    close(fdimg);
+
+   
+}
+
