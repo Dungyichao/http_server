@@ -91,7 +91,7 @@ int main(int argc, char const *argv[])
         char buffer[30000] = {0};
         valread = read( new_socket , buffer, 30000);
         
-        char httpHeader1[800000] = "HTTP/1.1 200 OK\r\n\n";
+        char httpHeader1[800021] = "HTTP/1.1 200 OK\r\n\n";
 
         char *parse_string = parse(buffer);  //Try to get the path which the client ask for
         printf("Client ask for path: %s\n", parse_string);
@@ -120,9 +120,9 @@ int main(int argc, char const *argv[])
             //send other file such as .css, .html and so on
             setHttpHeader_other(httpHeader1, parse_string);
             write(new_socket , httpHeader1 , strlen(httpHeader1));
-            printf("\n Send other file, total size: %d \n", strlen(httpHeader1));
+            //printf("\n Send other file, total size: %d \n", strlen(httpHeader1));
         }
-        printf("------------------Server sent----------------------------------------------------\n");
+        printf("\n------------------Server sent----------------------------------------------------\n");
         close(new_socket);
     }
     return 0;
@@ -162,7 +162,6 @@ void setHttpHeader_other(char httpHeader[], char *path)
     FILE *htmlData1 = fopen(path_head, "r");
 
     ////char httpHeader1[8000] = "HTTP/1.1 200 OK\r\n\n";
-    int n = 0;
     int size_data = 800000;
     char line[100];
 
@@ -174,11 +173,9 @@ void setHttpHeader_other(char httpHeader[], char *path)
         
         while (fgets(line, 100, htmlData1) != 0 ) {
             strcat(responseData, line);
-            n++;
         }
         strcat(httpHeader, responseData);
         fclose(htmlData1);
-        printf("\n read %d time and Length of file: %d", n, strlen(responseData));
         //free(responseData);      
     }
     else
@@ -293,9 +290,12 @@ int send_image1(int & fd, char image_path[]){
 
     int fdimg = open(image_path, O_RDONLY);
     fstat(fdimg, &stat_buf);
+    printf("image total byte: %d\n", stat_buf.st_mode);
     int sent = sendfile(fd, fdimg, NULL, stat_buf.st_mode);
+    printf("image total byte: %d, image byte sent: %d \n", stat_buf.st_mode, sent);
     close(fdimg);
 
    
 }
+
 
