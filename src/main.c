@@ -154,7 +154,7 @@ void setHttpHeader_other(char httpHeader[], char *path)
     char responseData[3800000];
     if(htmlData1){
         while (fgets(line, 100, htmlData1) != 0 ) {
-            strcat(responseData, "TTT");
+            strcat(responseData, line);
         }
         strcat(httpHeader, responseData);
         fclose(htmlData1);
