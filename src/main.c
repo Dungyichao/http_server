@@ -29,13 +29,19 @@ char* parse(char line[]);
 char* parse1(char line[]);
 std::string read_image(const std::string& image_path);
 int send_image(int & fd, std::string& image);
-int send_image1(int & fd, char image_path[]);
+int send_image1(int & fd, char image_path[], char head[]);
+
 
 
 //https://stackoverflow.com/questions/45670369/c-web-server-image-not-showing-up-on-browser
 char imageheader[] = 
 "HTTP/1.1 200 Ok\r\n"
 "Content-Type: image/jpeg\r\n\r\n";
+
+char iconheader[] = 
+"HTTP/1.1 200 Ok\r\n"
+"Content-Type: image/vnd.microsoft.icon\r\n\r\n";
+
 
 
 int main(int argc, char const *argv[])
@@ -90,6 +96,8 @@ int main(int argc, char const *argv[])
         
         char buffer[30000] = {0};
         valread = read( new_socket , buffer, 30000);
+
+        //printf("\n Buffer: %s \n ", buffer);
         
         char httpHeader1[800021] = "HTTP/1.1 200 OK\r\n\n";
 
@@ -114,8 +122,17 @@ int main(int argc, char const *argv[])
             //std::string img = read_image(path_head);
             //write_ok = send_image(new_socket, img);
 
-            send_image1(new_socket, path_head);
+            send_image1(new_socket, path_head, imageheader);
         }
+        else if (parse_ext[0] == 'i' && parse_ext[1] == 'c' && parse_ext[2] == 'o')
+        {
+            //https://www.cisco.com/c/en/us/support/docs/security/web-security-appliance/117995-qna-wsa-00.html
+            char path_head[500] = ".";
+            strcat(path_head, "/img/favicon.png");
+            send_image1(new_socket, path_head, iconheader);
+            //send_icon1(new_socket, path_head, iconheader);
+        }
+        
         else{
             //send other file such as .css, .html and so on
             setHttpHeader_other(httpHeader1, parse_string);
@@ -278,7 +295,7 @@ int send_image(int & fd, std::string& image){
 //http://www.tldp.org/LDP/LG/issue91/tranter.html
 //https://linux.die.net/man/2/fstat
 //http://man7.org/linux/man-pages/man2/stat.2.html
-int send_image1(int & fd, char image_path[]){
+int send_image1(int & fd, char image_path[], char head[]){
 
     /*
     char imageheader[] = 
@@ -287,7 +304,9 @@ int send_image1(int & fd, char image_path[]){
     */
     struct stat stat_buf;  /* hold information about input file */
 
-    write(fd, imageheader, sizeof(imageheader) - 1);
+    write(fd, head, strlen(head));
+
+    //write(fd, imageheader, sizeof(imageheader) - 1);
 
     int fdimg = open(image_path, O_RDONLY);
      
@@ -302,6 +321,5 @@ int send_image1(int & fd, char image_path[]){
         sendfile(fd, fdimg, NULL, block_size);
         img_total_size = img_total_size - block_size;
     }
-    close(fdimg);   
+    close(fdimg);
 }
-
