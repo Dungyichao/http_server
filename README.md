@@ -57,8 +57,13 @@ The ip address of our server is 172.16.216.205, Subnet Mask is 255.255.0.0, the 
 </p>
 
 ## 2.2 Elements
-The following image is basically what we are going to implement in the code. <br />
+The following image is basically what we are going to implement in the code. We obmit some initialization part which was mentioned in the Meduim article (
+[link](https://medium.com/from-the-scratch/http-server-what-do-you-need-to-know-to-build-a-simple-http-server-from-scratch-d1ef8945e4fa)
+), however, you can still find it in our code.
+<br />
 
 <p align="center">
 <img src="/img/process_element.JPG" height="90%" width="90%">  
 </p>
+
+The story is, the server keep listening any message it received, then we need to analyze what the useful information in the message by parsing it. The useful information we care about is the file name (with path) and file extension. The server then open the file according to the path and put the content of the file into a message which we will later send to the client. Before sending the content, we should first tell the client what content type we are going to send, maybe image file (.jpg, .png, ...) or txt file (.html, .doc, ...) and so on (refer to the link: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types). 
