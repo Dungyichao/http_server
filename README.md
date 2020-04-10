@@ -40,7 +40,7 @@ We are going to implement code for a http server on Ubuntu Desktop. Please follo
     <tbody>
         <tr>
             <td align="center">Web Server</td>
-            <td align="Left">Linux OS such as Ubuntu or Debian. <br />C\C++ development environment: Visual Studio Code or Geany.</td>
+            <td align="Left">Linux OS such as <b>Ubuntu</b> or <b>Debian</b>. <br />C\C++ development environment: <b>Visual Studio Code </b>or <b>Geany</b>.</td>
         </tr>
         <tr>
             <td align="center">Client</td>
