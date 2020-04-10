@@ -12,6 +12,8 @@ In the internet world, there is always a server who can serve multiple clients. 
 <img src="/img/server-client-role.JPG" height="100%" width="100%">  
 </p>
 
-You can make a web server at your home and use your own laptop to access the server through LAN which stands for Local Area Network (having a Wi-Fi router can create a LAN at your home). It requires 2 laptops or two PC. One of the computer need to be installed with Linux such as Ubuntu OS. 
+You can make a web server at your home and use your own laptop to access the server through LAN which stands for Local Area Network (having a Wi-Fi router can create a LAN at your home). However, if your html file includes some resources in WAN (Wide Area Network), then you need to be able to access the internet for displaying your html correctly.
+
+What you need is 2 laptops or two PCs. One of the computer need to be installed with Linux such as Ubuntu OS. 
 
 # 2. Implement the Code
