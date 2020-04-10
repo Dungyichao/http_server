@@ -17,7 +17,7 @@ You can make a web server at your home and use your own laptop to access the ser
 
 What you need is 2 laptops or two PCs. One of the computer need to be installed with Linux such as Ubuntu OS. 
 
-# 2. Implement the Code
+# 2. Overview
 We are going to implement code for a http server on Ubuntu Desktop. Please follow the Visual Studio Code official website to create a project (
 [link](https://code.visualstudio.com/docs/cpp/config-linux)
 ). Download the web content which provide to you in this tutorial folder src (
@@ -56,7 +56,7 @@ The ip address of our server is 172.16.216.205, Subnet Mask is 255.255.0.0, the 
 </table>
 </p>
 
-## 2.2 Elements
+## 2.2 Process Elements
 The following image is basically what we are going to implement in the code. We obmit some initialization part which was mentioned in the Meduim article (
 [link](https://medium.com/from-the-scratch/http-server-what-do-you-need-to-know-to-build-a-simple-http-server-from-scratch-d1ef8945e4fa)
 ), however, you can still find it in our code.
@@ -70,5 +70,6 @@ The story is, the server keep listening any message it received, then we need to
 [link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
 ), then we can send the reply-message (content of file) to the client. 
 
-### 2.3 Code Structure
+# 3. Implement the Code
+### 3.1 Code Structure
 
