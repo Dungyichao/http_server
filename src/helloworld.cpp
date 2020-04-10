@@ -101,7 +101,8 @@ int main(int argc, char const *argv[])
 
         char *copy_head = (char *)malloc(strlen(http_header) +200);
         strcpy(copy_head, http_header);
-
+        
+        //https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
         if(strlen(parse_string) <= 1){
             //case that the parse_string = "/"  --> Send index.html file
             //write(new_socket , httpHeader , strlen(httpHeader));
