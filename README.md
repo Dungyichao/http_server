@@ -40,7 +40,7 @@ The local ip address of my web server is 172.16.216.205, Subnet Mask is 255.255.
 
 I made this website (host on 
 [Google Firebase](https://firebase.google.com/)
-) for the activity in our company to celebrate 2020 Chinese New Year. The template is from https://startbootstrap.com/themes/agency/
+) for the activity in our company (Nan Ya Plastics Corp. America which HQ in <b>Taiwan</b>) to celebrate 2020 Chinese New Year. The template is from https://startbootstrap.com/themes/agency/
 
 ## 2.1 System Requirement
 <p align="center">
