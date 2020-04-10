@@ -32,7 +32,11 @@ Copy paste the code provided in this tutorial (
 [link](https://github.com/Dungyichao/http_server/blob/master/src/helloworld.cpp)
 ) into the helloworld.cpp file. Compile the code and execute it. 
 
-The ip address of our server is 172.16.216.205, Subnet Mask is 255.255.0.0, the default gateway should be the ip address of your router , in our case is 172.16.216.6.  If everything is working properly, now you can type in <b>172.16.216.205:8080</b> in the browser on your laptop or cellphone (which should connect to Wi-Fi router at your home).
+The ip address of our server is 172.16.216.205, Subnet Mask is 255.255.0.0, the default gateway should be the ip address of your router , in our case is 172.16.216.6.  If everything is working properly, now you can type in <b>172.16.216.205:8080</b> in the browser on your laptop or cellphone (which should connect to Wi-Fi router at your home). What you see in the browser should be the same as the following animation.
+
+<p align="center">
+<img src="/img/webpagedemo.gif" height="90%" width="90%">  
+</p>
 
 ## 2.1 System Requirement
 <p align="center">
@@ -63,7 +67,7 @@ The following image is basically what we are going to implement in the code. We 
 <br />
 
 <p align="center">
-<img src="/img/process_element.JPG" height="90%" width="90%">  
+<img src="/img/process_element1.jpg" height="90%" width="90%">  
 </p>
 
 The story is, the server keep listening any message it received, then we need to analyze what the useful information in the message by parsing it. The useful information we care about is the file name (with path) and file extension. The server then open the file according to the path and put the content of the file into a reply-message which we will later send to the client. Before sending the reply-message, we should first tell the client what kind of file content type we are going to send, maybe image file (.jpg, .png, ...) or txt file (.html, .doc, ...) and so on (refer to the link: 
