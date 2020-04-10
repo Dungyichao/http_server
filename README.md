@@ -18,7 +18,13 @@ You can make a web server at your home and use your own laptop to access the ser
 What you need is 2 laptops or two PCs. One of the computer need to be installed with Linux such as Ubuntu OS. 
 
 # 2. Implement the Code
-We are going to implement code for a http server. 
+We are going to implement code for a http server on Ubuntu Desktop. Please follow the Visual Studio Code official website to create a project (
+[link](https://code.visualstudio.com/docs/cpp/config-linux)
+). 
+
+<p align="center">
+<img src="/img/project_folder.JPG" height="90%" width="90%">  
+</p>
 
 ## 2.1 System Requirement
 <p align="center">
@@ -32,7 +38,7 @@ We are going to implement code for a http server.
     <tbody>
         <tr>
             <td align="center">Web Server</td>
-            <td align="Left">Linux OS such as Ubuntu or Debian. <br />C\C++ development environment</td>
+            <td align="Left">Linux OS such as Ubuntu or Debian. <br />C\C++ development environment: Visual Studio Code or Geany.</td>
         </tr>
         <tr>
             <td align="center">Client</td>
