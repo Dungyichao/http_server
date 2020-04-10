@@ -28,6 +28,12 @@ We are going to implement code for a http server on Ubuntu Desktop. Please follo
 <img src="/img/project_folder.JPG" height="90%" width="90%">  
 </p>
 
+Copy paste the code provided in this tutorial (
+[link](https://github.com/Dungyichao/http_server/blob/master/src/main.c)
+) into the helloworld.cpp file. Compile the code and execute it. 
+
+The ip address of our server is 172.16.216.205, Mask if 255.255.0.0
+
 ## 2.1 System Requirement
 <p align="center">
 <table>
