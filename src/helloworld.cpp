@@ -136,7 +136,7 @@ int main(int argc, char const *argv[])
         }
         else if (parse_ext[strlen(parse_ext)-2] == 'j' && parse_ext[strlen(parse_ext)-1] == 's')
         {
-            //font type, to display icon from FontAwesome
+            //javascript
             char path_head[500] = ".";
             strcat(path_head, parse_string);
             strcat(copy_head, "Content-Type: text/javascript\r\n\r\n");
@@ -144,7 +144,7 @@ int main(int argc, char const *argv[])
         }
         else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2] == 's' && parse_ext[strlen(parse_ext)-1] == 's')
         {
-            //font type, to display icon from FontAwesome
+            //css
             char path_head[500] = ".";
             strcat(path_head, parse_string);
             strcat(copy_head, "Content-Type: text/css\r\n\r\n");
@@ -152,14 +152,14 @@ int main(int argc, char const *argv[])
         }
         else if (parse_ext[0] == 'w' && parse_ext[1] == 'o' && parse_ext[2] == 'f')
         {
-            //font type, to display icon from FontAwesome
+            //Web Open Font Format woff and woff2
             char path_head[500] = ".";
             strcat(path_head, parse_string);
             strcat(copy_head, "Content-Type: font/woff\r\n\r\n");
             send_message(new_socket, path_head, copy_head);
         }
         else{
-            //send other file such as .css, .html and so on
+            //send other file 
             char path_head[500] = ".";
             strcat(path_head, parse_string);
             strcat(copy_head, "Content-Type: text/plain\r\n\r\n");
