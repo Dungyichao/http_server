@@ -38,6 +38,8 @@ The ip address of our server is 172.16.216.205, Subnet Mask is 255.255.0.0, the 
 <img src="/img/webpagedemo.gif" height="90%" width="90%">  
 </p>
 
+I made this website for the activity in our company to celebrate 2020 Chinese New Year. The template is from https://startbootstrap.com/themes/agency/
+
 ## 2.1 System Requirement
 <p align="center">
 <table>
