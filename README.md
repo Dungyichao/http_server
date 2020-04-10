@@ -19,6 +19,7 @@ What you need is 2 laptops or two PCs. One of the computer need to be installed 
 
 # 2. Implement the Code
 We are going to implement code for a http server. 
+
 ## 2.1 System Requirement
 <p align="center">
 <table>
@@ -35,9 +36,11 @@ We are going to implement code for a http server.
         </tr>
         <tr>
             <td align="center">Client</td>
-            <td align="Left">Whatever OS (Windows, IOS, Android, Ubuntu) which is able to access web browser is good</td>
+            <td align="Left">Whatever OS (Windows, IOS, Android, Ubuntu) which is able to access web browser is good. You can use your cell phone as well.</td>
         </tr>
     </tbody>
 </table>
 </p>
+
+## 2.2 Elements
 
