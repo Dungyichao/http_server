@@ -52,7 +52,7 @@ I made this website for the activity in our company to celebrate 2020 Chinese Ne
     <tbody>
         <tr>
             <td align="center">Web Server</td>
-            <td align="Left">Linux OS such as <b>Ubuntu</b> or <b>Debian</b>. <br />C\C++ development environment: <b>Visual Studio Code </b>or <b>Geany</b>.</td>
+            <td align="Left">Linux OS such as <b>Ubuntu</b> or <b>Debian</b>. <br />C\C++ development environment: <b>Visual Studio Code </b>or <b>Geany</b>. (Raspberry pi maybe not a good idea, it can serve the website but it would hang in the middle of transfering large image.)</td>
         </tr>
         <tr>
             <td align="center">Client</td>
