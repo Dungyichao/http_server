@@ -5,6 +5,7 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
 [pdf link](https://github.com/Dungyichao/http_server/blob/master/doc/HTTP%20Server_%20Everything%20you%20need%20to%20know%20to%20Build%20a%20simple%20HTTP%20server%20from%20scratch_pdf2.pdf)
 )
 
+
 # 1. Basic Knowledge <br />
 In the internet world, there is always a server who can serve multiple clients. For example, Google, Netflix, Facebook... and so on are servers. People like us are client and we can use web browser (Chrome, Edge, Opera, Firefox....) to communicate with servers. <br />
 
@@ -17,3 +18,25 @@ You can make a web server at your home and use your own laptop to access the ser
 What you need is 2 laptops or two PCs. One of the computer need to be installed with Linux such as Ubuntu OS. 
 
 # 2. Implement the Code
+## 2.1 System Requirement
+<p align="center">
+<table>
+    <thead>
+        <tr>
+            <th align="center">Role</th>
+            <th align="center">Requirement</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">Web Server</td>
+            <td align="center">Linux OS such as Ubuntu or Debian. <br />C\C++ development environment</td>
+        </tr>
+        <tr>
+            <td align="center">Client</td>
+            <td align="center">Whatever OS (Windows, IOS, Android, Ubuntu) which is able to access web browser is good</td>
+        </tr>
+    </tbody>
+</table>
+</p>
+
