@@ -57,4 +57,8 @@ The ip address of our server is 172.16.216.205, Subnet Mask is 255.255.0.0, the 
 </p>
 
 ## 2.2 Elements
+The following image is basically what we are going to implement in the code. <br />
 
+<p align="center">
+<img src="/img/process_element.JPG" height="90%" width="90%">  
+</p>
