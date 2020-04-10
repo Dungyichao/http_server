@@ -35,7 +35,7 @@ Copy paste the code provided in this tutorial (
 The local ip address of my web server is 172.16.216.205, Subnet Mask is 255.255.0.0, the default gateway should be the ip address of your router , in our case is 172.16.216.6.  Modify these number to fit your case. If everything is working properly, now you can type in <b>172.16.216.205:8080</b> in the browser on your laptop or cellphone (which should connect to Wi-Fi router at your home). What you see in the browser should be the same as the following animation.
 
 <p align="center">
-<img src="/img/webpagedemo.gif" height="90%" width="90%">  
+<img src="/img/webpagedemo1.gif" height="95%" width="95%">  
 </p>
 
 I made this website (host on 
