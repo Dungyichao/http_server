@@ -18,6 +18,7 @@ You can make a web server at your home and use your own laptop to access the ser
 What you need is 2 laptops or two PCs. One of the computer need to be installed with Linux such as Ubuntu OS. 
 
 # 2. Implement the Code
+We are going to implement code for a http server. 
 ## 2.1 System Requirement
 <p align="center">
 <table>
