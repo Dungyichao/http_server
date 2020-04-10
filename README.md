@@ -31,11 +31,11 @@ We are going to implement code for a http server.
     <tbody>
         <tr>
             <td align="center">Web Server</td>
-            <td align="center">Linux OS such as Ubuntu or Debian. <br />C\C++ development environment</td>
+            <td align="Left">Linux OS such as Ubuntu or Debian. <br />C\C++ development environment</td>
         </tr>
         <tr>
             <td align="center">Client</td>
-            <td align="center">Whatever OS (Windows, IOS, Android, Ubuntu) which is able to access web browser is good</td>
+            <td align="Left">Whatever OS (Windows, IOS, Android, Ubuntu) which is able to access web browser is good</td>
         </tr>
     </tbody>
 </table>
