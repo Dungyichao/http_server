@@ -29,11 +29,8 @@ int send_message(int & fd, char image_path[], char head[]);
 /*std::string read_image(const std::string& image_path);
 int send_image(int & fd, std::string& image);*/
 
-
-
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
 //https://stackoverflow.com/questions/45670369/c-web-server-image-not-showing-up-on-browser
-
 
 char http_header[25] = "HTTP/1.1 200 Ok\r\n";
 
@@ -54,14 +51,12 @@ int main(int argc, char const *argv[])
         exit(EXIT_FAILURE);
     }
     
-
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons( PORT );
     
     memset(address.sin_zero, '\0', sizeof address.sin_zero);
     
-       
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address))<0)
     {
         perror("In bind");
@@ -75,7 +70,7 @@ int main(int argc, char const *argv[])
     
     //report(&address);
     //setHttpHeader(httpHeader);
-    int write_ok;
+    //int write_ok;
     
     while(1)
     {
@@ -164,10 +159,9 @@ int main(int argc, char const *argv[])
         }
         else{
             //send other file such as .css, .html and so on
-            
             char path_head[500] = ".";
             strcat(path_head, parse_string);
-            strcat(copy_head, "");
+            strcat(copy_head, "Content-Type: text/plain\r\n\r\n");
             send_message(new_socket, path_head, copy_head);
             
             printf("Else: %s \n", parse_string);
@@ -181,8 +175,6 @@ int main(int argc, char const *argv[])
     }
     return 0;
 }
-
-
 
 char* parse(char line[])
 {
@@ -202,7 +194,6 @@ char* parse(char line[])
    }
    printf("arrive here");
    return message;
-    
 }
 
 char* parse1(char line[])
@@ -222,8 +213,7 @@ char* parse1(char line[])
       
    }
    printf("arrive here");
-   return message;
-    
+   return message;   
 }
 
 //https://stackoverflow.com/questions/45670369/c-web-server-image-not-showing-up-on-browser
@@ -232,7 +222,6 @@ char* parse1(char line[])
 //http://man7.org/linux/man-pages/man2/stat.2.html
 //http://man7.org/linux/man-pages/man2/sendfile.2.html
 int send_message(int & fd, char image_path[], char head[]){
-
     /*
     char imageheader[] = 
     "HTTP/1.1 200 Ok\r\n"
@@ -366,3 +355,9 @@ int send_image(int & fd, std::string& image){
     return ret;
 }
 */
+
+
+
+
+
+
