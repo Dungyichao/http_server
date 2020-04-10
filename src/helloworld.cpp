@@ -20,8 +20,7 @@
 
 #define PORT 8080
 
-char* parse(char line[]);
-char* parse1(char line[]);
+char* parse(char line[], const char symbol[]);
 int send_message(int fd, char image_path[], char head[]);
 //void setHttpHeader_other(char httpHeader[], char *path);
 //void setHttpHeader(char httpHeader[]);
@@ -89,7 +88,7 @@ int main(int argc, char const *argv[])
         
         //char httpHeader1[800021] = "HTTP/1.1 200 OK\r\n\n";
 
-        char *parse_string = parse(buffer);  //Try to get the path which the client ask for
+        char *parse_string = parse(buffer, " ");  //Try to get the path which the client ask for
         printf("Client ask for path: %s\n", parse_string);
 
         //prevent strtok from changing the string
@@ -97,7 +96,7 @@ int main(int argc, char const *argv[])
         //https://stackoverflow.com/questions/5099669/invalid-conversion-from-void-to-char-when-using-malloc/5099675 
         char *copy = (char *)malloc(strlen(parse_string) + 1);
         strcpy(copy, parse_string);
-        char *parse_ext = parse1(copy);  // get the file extension such as JPG, jpg
+        char *parse_ext = parse(copy, ".");  // get the file extension such as JPG, jpg
 
         char *copy_head = (char *)malloc(strlen(http_header) +200);
         strcpy(copy_head, http_header);
@@ -177,10 +176,10 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-char* parse(char line[])
+char* parse(char line[], const char symbol[])
 {
     char *message;
-    char * token = strtok(line, " ");
+    char * token = strtok(line, symbol);
     int current = 0;
 
     while( token != NULL ) {
@@ -193,26 +192,6 @@ char* parse(char line[])
       current = current + 1;
    }
    return message;
-}
-
-char* parse1(char line[])
-{
-    char *message;
-    char * token = strtok(line, ".");
-    int current = 0;
-
-    while( token != NULL ) {
-      
-      token = strtok(NULL, " ");
-      if(current == 0){
-          message = token;
-          return message;
-      }
-      current = current + 1;
-      
-   }
-   printf("arrive here");
-   return message;   
 }
 
 //https://stackoverflow.com/questions/45670369/c-web-server-image-not-showing-up-on-browser
