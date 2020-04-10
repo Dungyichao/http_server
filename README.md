@@ -32,7 +32,7 @@ Copy paste the code provided in this tutorial (
 [link](https://github.com/Dungyichao/http_server/blob/master/src/main.c)
 ) into the helloworld.cpp file. Compile the code and execute it. 
 
-The ip address of our server is 172.16.216.205, Mask if 255.255.0.0
+The ip address of our server is 172.16.216.205, Subnet Mask is 255.255.0.0. If everything is working properly, now you can type in <b>172.16.216.205:8080</b> in the browser on your laptop or cellphone (which should connect to Wi-Fi router at your home).
 
 ## 2.1 System Requirement
 <p align="center">
