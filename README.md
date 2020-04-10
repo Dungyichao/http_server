@@ -66,6 +66,9 @@ The following image is basically what we are going to implement in the code. We 
 <img src="/img/process_element.JPG" height="90%" width="90%">  
 </p>
 
-The story is, the server keep listening any message it received, then we need to analyze what the useful information in the message by parsing it. The useful information we care about is the file name (with path) and file extension. The server then open the file according to the path and put the content of the file into a message which we will later send to the client. Before sending the content, we should first tell the client what content type we are going to send, maybe image file (.jpg, .png, ...) or txt file (.html, .doc, ...) and so on (refer to the link: 
+The story is, the server keep listening any message it received, then we need to analyze what the useful information in the message by parsing it. The useful information we care about is the file name (with path) and file extension. The server then open the file according to the path and put the content of the file into a message which we will later send to the client. Before sending the content, we should first tell the client what kind of content type we are going to send, maybe image file (.jpg, .png, ...) or txt file (.html, .doc, ...) and so on (refer to the link: 
 [link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
 ), then we can send the content to the client. 
+
+### 2.3 Code Structure
+
