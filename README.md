@@ -5,5 +5,6 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
 
 # 1. Basic Knowledge <br />
 <p align="center">
-<img src="/img/server-client-role.JPG" height="70%" width="70%">  
+<img src="/img/server-client-role.JPG" height="100%" width="100%">  
 </p>
+In the internet world, there is always a server who can serve multiple clients. For example, Google, Netflix, Facebook... and so on are servers. People like us are client and we can use web browser (Chrome, Edge, Opera, Firefox....) to communicate with servers.
