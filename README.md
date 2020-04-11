@@ -172,6 +172,10 @@ else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2]
             send_message(new_socket, path_head, copy_head);
 }
  ```
- I know you are still wondering the very first request information I mentioned in section 3.2 which contains ```/``` such a useless information. Actually, it does give us a hint to send it our web page, namely ```index.html```.  
+ I know you are still wondering the very first request information I mentioned in section 3.2 which contains ```/``` such a useless information. Actually, it does give us a hint to send it our web page, namely ```index.html```. The client will receive the html file looks like the following
+ 
+ <p align="center">
+<img src="/img/index_html.JPG" height="95%" width="95%">  
+</p>
  
 ## 3.4 Reply to the Client
