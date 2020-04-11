@@ -309,4 +309,4 @@ You might not familiar with the above command, so the following link may help yo
 </p>
 
 # 4. Summary
-
+This is a simple, experimental but functional Ubuntu web server. Some error protection method not inclue. Any advise are welcome. I also want to implment a <b>webcam</b> server sending real-time streaming. 
