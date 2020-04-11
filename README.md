@@ -255,3 +255,58 @@ Here we list out some common file extension and their MIME Type.
 </p>
  
 ## 3.4 Reply to the Client
+The following function first send notification message to the client and let it knows what kind of content we are going to send (section 3.3). We then open the file using ```open``` and retrieve information of the file (not the content) using ```fstat``` and store in ```stat object```. Lastly, we read the file content and send the content using ```sendfile```. Because some file might be too large to send in one message, thus, we need to send the content pices by pices (size = block_size).
+
+```c++
+int send_message(int fd, char image_path[], char head[]){
+
+    struct stat stat_buf;  /* hold information about input file */
+
+    write(fd, head, strlen(head));
+
+    int fdimg = open(image_path, O_RDONLY);
+     
+    fstat(fdimg, &stat_buf);
+    int img_total_size = stat_buf.st_size;
+    int block_size = stat_buf.st_blksize;
+
+    while(img_total_size > 0){
+        sendfile(fd, fdimg, NULL, block_size);
+        img_total_size = img_total_size - block_size;
+    }
+    close(fdimg);
+}
+```
+You might not familiar with the above command, so the following link may help you.
+
+<p align="center">
+<table>
+    <thead>
+        <tr>
+            <th align="center">Term</th>
+            <th align="center">Web Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">stat</td>
+            <td align="Left">http://man7.org/linux/man-pages/man2/stat.2.html</td>
+        </tr>
+        <tr>
+            <td align="center">sendfile</td>
+            <td align="Left">http://man7.org/linux/man-pages/man2/sendfile.2.html <br /> http://www.tldp.org/LDP/LG/issue91/tranter.html</td>
+        </tr>
+        <tr>
+            <td align="center">fstat</td>
+            <td align="Left">https://linux.die.net/man/2/fstat</td>
+        </tr>
+        <tr>
+            <td align="center">open</td>
+            <td align="Left">http://man7.org/linux/man-pages/man2/open.2.html</td>
+        </tr>
+    </tbody>
+</table>
+</p>
+
+# 4. Summary
+
