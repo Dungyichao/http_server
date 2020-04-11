@@ -106,10 +106,28 @@ At first glance, it contains useless information (maybe not true for Hacker), ho
 <p align="center">
 <img src="/img/http_request_js.JPG" height="95%" width="95%">  
 </p> 
-OK ! I think you nail it. The information between GET and HTTP/1.1. That is the file path which the client requires to display the website correctly on it's browser. <br />
+OK ! I think you nail it. The information between GET and HTTP/1.1. That is the file path which the client requires to display the website correctly on it's browser. <br /><br />
 
-The <b>parse function</b> just retrieves the <b>path</b> and <b>file extension</b> (such as .jpg  .html  .css....) from a bunch of information.  
+The <b>parse function</b> just retrieves the <b>path</b> and <b>file extension</b> (such as .jpg  .html  .css....) from a bunch of information. <br /> 
+```c++
+char* parse(char line[], const char symbol[])
+{
+    char *message;
+    char * token = strtok(line, symbol);
+    int current = 0;
 
+    while( token != NULL ) {
+      
+      token = strtok(NULL, " ");
+      if(current == 0){
+          message = token;
+          return message;
+      }
+      current = current + 1;
+   }
+   return message;
+}
+```
 
 ## 3.3 Classify the Request 
 
