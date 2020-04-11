@@ -145,7 +145,8 @@ In
             strcat(copy_head, "Content-Type: text/html\r\n\r\n");
             send_message(new_socket, path_head, copy_head);
 }
-else if ((parse_ext[0] == 'j' && parse_ext[1] == 'p' && parse_ext[2] == 'g') || (parse_ext[0] == 'J' && parse_ext[1] == 'P' && parse_ext[2] == 'G'))
+else if ((parse_ext[0] == 'j' && parse_ext[1] == 'p' && parse_ext[2] == 'g') || 
+(parse_ext[0] == 'J' && parse_ext[1] == 'P' && parse_ext[2] == 'G'))
 {
             //send image to client
             char path_head[500] = ".";
@@ -161,7 +162,8 @@ else if (parse_ext[strlen(parse_ext)-2] == 'j' && parse_ext[strlen(parse_ext)-1]
             strcat(copy_head, "Content-Type: text/javascript\r\n\r\n");
             send_message(new_socket, path_head, copy_head);
 }
-else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2] == 's' && parse_ext[strlen(parse_ext)-1] == 's')
+else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2] == 's' 
+&& parse_ext[strlen(parse_ext)-1] == 's')
 {
             //css
             char path_head[500] = ".";
@@ -170,6 +172,6 @@ else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2]
             send_message(new_socket, path_head, copy_head);
 }
  ```
- I know you are still wondering the very first request information I mentioned in section 3.2 which contains ```/``` no useful information.  
+ I know you are still wondering the very first request information I mentioned in section 3.2 which contains ```/``` such a useless information. Actually, it does give us a hint to send it our web page, namely ```index.html```.  
  
 ## 3.4 Reply to the Client
