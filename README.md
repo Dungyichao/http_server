@@ -177,5 +177,7 @@ else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2]
  <p align="center">
 <img src="/img/index_html.JPG" height="95%" width="95%">  
 </p>
+
+The client's web browser will read line by line and do whatever the html file tells it. When it reads until line 14 (in above image), the client will send request to the server to ask for ```vendor/fontawesome-free/css/all.min.css``` which is a css file. Server than ```parse``` the request, and then classify the request. 
  
 ## 3.4 Reply to the Client
