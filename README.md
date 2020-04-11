@@ -201,5 +201,57 @@ While writing this tutorial, a special file extension request from the client ``
 
 Here we list out some common file extension and their MIME Type.
 
+<p align="center">
+<table>
+    <thead>
+        <tr>
+            <th align="center">File Extension</th>
+            <th align="center">MIME Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">.css</td>
+            <td align="Left">text/css</td>
+        </tr>
+        <tr>
+            <td align="center">.html</td>
+            <td align="Left">text/html</td>
+        </tr>
+        <tr>
+            <td align="center">.ico</td>
+            <td align="Left">image/vnd.microsoft.icon</td>
+        </tr>
+        <tr>
+            <td align="center">.jpg</td>
+            <td align="Left">image/jpeg</td>
+        </tr>
+        <tr>
+            <td align="center">.js</td>
+            <td align="Left">text/javascript</td>
+        </tr>
+        <tr>
+            <td align="center">.json</td>
+            <td align="Left">application/json</td>
+        </tr>
+        <tr>
+            <td align="center">.ttf</td>
+            <td align="Left">font/ttf</td>
+        </tr>
+        <tr>
+            <td align="center">.txt</td>
+            <td align="Left">text/plain</td>
+        </tr>
+        <tr>
+            <td align="center">.woff</td>
+            <td align="Left">font/woff</td>
+        </tr>
+        <tr>
+            <td align="center">.xml</td>
+            <td align="Left">text/xml</td>
+        </tr>
+    </tbody>
+</table>
+</p>
  
 ## 3.4 Reply to the Client
