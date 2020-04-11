@@ -83,5 +83,5 @@ The story is, the server keep listening any message it received, then we need to
 ### 3.1 Code Structure
 
 <p align="center">
-<img src="/img/code_struct.jpg" height="90%" width="90%">  
+<img src="/img/code_struct.JPG" height="90%" width="90%">  
 </p>
