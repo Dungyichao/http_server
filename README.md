@@ -81,6 +81,10 @@ The story is, the server keep listening any message it received, then we need to
 
 # 3. Implement the Code
 The overall code can be viewed from the following link: https://github.com/Dungyichao/http_server/blob/master/src/helloworld.cpp
+After running the code, you will see the following animation in your terminal
+<p align="center">
+<img src="/img/runcode.gif" height="90%" width="90%">  
+</p>
 
 ## 3.1 Code Structure
 We keep looping through the following code in sequence, namely 1 --> 2 --> 3 --> 4 --> 5 --> 1 --> 2 --> ......  We only focus on number 3 and number 4 and the reply function as well. <br />
