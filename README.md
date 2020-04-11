@@ -82,7 +82,7 @@ The story is, the server keep listening any message it received, then we need to
 # 3. Implement the Code
 
 ### 3.1 Code Structure
-We keep looping through the following code in sequence, namely 1 --> 2 --> 3 --> 4 --> 5 --> 1 --> 2 --> ...... <br />
+We keep looping through the following code in sequence, namely 1 --> 2 --> 3 --> 4 --> 5 --> 1 --> 2 --> ......  We only focus on number 3 and number 4 and the reply function as well. <br />
 
 <p align="center">
 <img src="/img/code_struct.JPG" height="90%" width="90%">  
