@@ -5,7 +5,7 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
 [pdf link](https://github.com/Dungyichao/http_server/blob/master/doc/HTTP%20Server_%20Everything%20you%20need%20to%20know%20to%20Build%20a%20simple%20HTTP%20server%20from%20scratch_pdf2.pdf)
 ). The tutorial in the Medium post only gives you a abstract concept and simple implementation but the author doesn't finish it. 
 
-<b>My tutorial will show you how to make a fully functional web server. </b> <br />
+<b>My tutorial will show you how to make a fully functional web server in 200 lines of code. </b> <br />
 
 # 1. Basic Knowledge <br />
 In the internet world, there is always a server who can serve multiple clients. For example, Google, Netflix, Facebook... and so on are servers. People like us are client and we can use web browser (Chrome, Edge, Opera, Firefox....) to communicate with servers. <br />
@@ -80,6 +80,7 @@ The story is, the server keep listening any message it received, then we need to
 ), then we can send the reply-message (content of file) to the client. 
 
 # 3. Implement the Code
+The overall code can be viewed from the following link: https://github.com/Dungyichao/http_server/blob/master/src/helloworld.cpp
 
 ### 3.1 Code Structure
 We keep looping through the following code in sequence, namely 1 --> 2 --> 3 --> 4 --> 5 --> 1 --> 2 --> ......  We only focus on number 3 and number 4 and the reply function as well. <br />
