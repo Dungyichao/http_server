@@ -95,6 +95,10 @@ We keep looping through the following code in sequence, namely 1 --> 2 --> 3 -->
 </p>
 
 ## 3.2 Parse the Request from the Client
+Let's take a look at what the <b>very first</b> information the client sends to you 
+<p align="center">
+<img src="/img/http_request_0.JPG" height="90%" width="90%">  
+</p>
 
 
 ## 3.3 Classify the Request 
