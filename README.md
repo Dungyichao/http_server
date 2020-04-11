@@ -79,5 +79,9 @@ The story is, the server keep listening any message it received, then we need to
 ), then we can send the reply-message (content of file) to the client. 
 
 # 3. Implement the Code
+
 ### 3.1 Code Structure
 
+<p align="center">
+<img src="/img/code_struct.jpg" height="90%" width="90%">  
+</p>
