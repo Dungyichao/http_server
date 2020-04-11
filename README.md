@@ -95,10 +95,18 @@ We keep looping through the following code in sequence, namely 1 --> 2 --> 3 -->
 </p>
 
 ## 3.2 Parse the Request from the Client
-Let's take a look at what the <b>very first</b> information the client sends to you 
+Let's take a look at what the <b>very first</b> request information the client sends to you 
 <p align="center">
-<img src="/img/http_request_0.JPG" height="90%" width="90%">  
+<img src="/img/http_request_0.JPG" height="95%" width="95%">  
 </p>
+At first glance, it contains useless information (maybe not true for Hacker), how about we look at the other request information?
+<p align="center">
+<img src="/img/http_request_img.JPG" height="95%" width="95%">  
+</p>
+<p align="center">
+<img src="/img/http_request_js.JPG" height="95%" width="95%">  
+</p>
+OK! I think you nail it.
 
 
 ## 3.3 Classify the Request 
