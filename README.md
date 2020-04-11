@@ -88,7 +88,7 @@ After running the code, and then enter the ip address and port number in the web
 </p>
 
 ## 3.1 Code Structure
-We keep looping through the following code in sequence, namely 1 --> 2 --> 3 --> 4 --> 5 --> 1 --> 2 --> ......  We only focus on number 3 and number 4 and the reply function as well. <br />
+We keep looping through the following code in sequence, namely 1 --> 2 --> 3 --> 4 (a) --> 5 --> 1 --> 2 --> 3 --> 4 (d) --> 5.....  We only focus on number 3 and number 4 and the reply function as well. <br />
 
 <p align="center">
 <img src="/img/code_struct.JPG" height="90%" width="90%">  
