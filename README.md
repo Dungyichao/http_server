@@ -250,6 +250,14 @@ Here we list out some common file extension and their MIME Type.
             <td align="center">.xml</td>
             <td align="Left">text/xml</td>
         </tr>
+        <tr>
+            <td align="center">.mp3</td>
+            <td align="Left">audio/mpeg</td>
+        </tr>
+        <tr>
+            <td align="center">.mpeg</td>
+            <td align="Left">video/mpeg</td>
+        </tr>
     </tbody>
 </table>
 </p>
