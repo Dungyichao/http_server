@@ -194,10 +194,12 @@ Content-Type: text/html\r\n\r\n
 ```
 You need to replace the ```text/html``` with the proper MIME Type according to the file extension. 
 
-While writing this tutorial, a special file extension request from the client ```/favicon.ico```, however, I couldn't find out the file in my website at all (I also look into all html, css, js files). It turns out that every browser will automatically request for ```/favicon.ico``` which is merely an icon for displaying on the browser tab shown in the following
+While writing this tutorial, a special file extension request from the client ```/favicon.ico```, however, I couldn't find out the file in my website at all (I also look into all html, css, js files). It turns out that every browser will automatically request for ```/favicon.ico``` which is merely an icon for displaying on the browser tab shown in the following. So what you need is just reply a .ico or .png file to the client.
  <p align="center">
 <img src="/img/ico.JPG" height="95%" width="95%">  
 </p>
+
+Here we list out some common file extension and their MIME Type.
 
  
 ## 3.4 Reply to the Client
