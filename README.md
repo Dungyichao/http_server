@@ -3,8 +3,9 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
 [Medium link](https://medium.com/from-the-scratch/http-server-what-do-you-need-to-know-to-build-a-simple-http-server-from-scratch-d1ef8945e4fa)
 , or you can read from the pdf version provided in this tutorial (
 [pdf link](https://github.com/Dungyichao/http_server/blob/master/doc/HTTP%20Server_%20Everything%20you%20need%20to%20know%20to%20Build%20a%20simple%20HTTP%20server%20from%20scratch_pdf2.pdf)
-). The tutorial in the Medium post only gives you a abstract concept and simple implementation but the author doesn't finish it. <b>My tutorial will teach you how to make a fully functional web server. </b> <br />
+). The tutorial in the Medium post only gives you a abstract concept and simple implementation but the author doesn't finish it. 
 
+<b>My tutorial will show you how to make a fully functional web server. </b> <br />
 
 # 1. Basic Knowledge <br />
 In the internet world, there is always a server who can serve multiple clients. For example, Google, Netflix, Facebook... and so on are servers. People like us are client and we can use web browser (Chrome, Edge, Opera, Firefox....) to communicate with servers. <br />
@@ -32,7 +33,7 @@ Copy paste the code provided in this tutorial (
 [link](https://github.com/Dungyichao/http_server/blob/master/src/helloworld.cpp)
 ) into the helloworld.cpp file. Compile the code and execute it. 
 
-The local ip address of my web server is 172.16.216.205, Subnet Mask is 255.255.0.0, the default gateway should be the ip address of your router , in our case is 172.16.216.6.  Modify these number to fit your case. If everything is working properly, now you can type in <b>172.16.216.205:8080</b> in the browser on your laptop or cellphone (which should connect to Wi-Fi router at your home). What you see in the browser should be the same as the following animation.
+The local ip address of my web server is 172.16.216.205, Subnet Mask is 255.255.0.0, the default gateway should be the ip address of your router , in our case is 172.16.216.6. <b>Modify these number to fit in your case.</b> If everything is working properly, now you can type in <b>172.16.216.205:8080</b> in the browser on your laptop or cellphone (which should connect to Wi-Fi router at your home). What you see in the browser should be the same as the following animation.
 
 <p align="center">
 <img src="/img/webpagedemo1.gif" height="95%" width="95%">  
