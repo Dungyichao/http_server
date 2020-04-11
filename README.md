@@ -132,7 +132,7 @@ char* parse(char line[], const char symbol[])
 ## 3.3 Classify the Request 
 In 
 [section 2.2 Process Element](https://github.com/Dungyichao/http_server#22-process-elements)
- we mention that we need to tell the client what kind of content we are going to send in. The classification is a bunch of if else logic checking according to the <b>parse</b> information (section 3.2).
+ we mention that we need to tell the client what kind of content we are going to send in. The classification is just a bunch of <b>if else</b> logic detemination according to the file extension from the <b>parsed</b> information (section 3.2).
  
  
 ## 3.4 Reply to the Client
