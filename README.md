@@ -91,7 +91,7 @@ After running the code, and then enter the ip address and port number in the web
 We keep looping through the following code in sequence, namely 1 --> 2 --> 3 --> 4 (a) --> 5 --> 1 --> 2 --> 3 --> 4 (d) --> 5.....  We only focus on number 3 and number 4 and the reply function as well. <br />
 
 <p align="center">
-<img src="/img/code_struct.JPG" height="90%" width="90%">  
+<img src="/img/code_struct.JPG" height="75%" width="75%">  
 </p>
 
 ## 3.2 Parse the Request from the Client
