@@ -134,7 +134,42 @@ char* parse(char line[], const char symbol[])
 ## 3.3 Classify the Request 
 In 
 [section 2.2 Process Element](https://github.com/Dungyichao/http_server#22-process-elements)
- we mention that we need to tell the client what kind of content we are going to send in. The classification is just a bunch of <b>if else</b> logic detemination according to the file extension from the <b>parsed</b> information (section 3.2).
+ we mention that we need to tell the client what kind of content we are going to send in. The classification is just a bunch of <b>if else</b> logic detemination according to the file extension from the <b>parsed</b> information (section 3.2). I just list the partial code in the following to give you some concept.
  
+ ```c++
+ if(strlen(parse_string) <= 1){
+            //case that the parse_string = "/"  --> Send index.html file
+            //write(new_socket , httpHeader , strlen(httpHeader));
+            char path_head[500] = ".";
+            strcat(path_head, "/index.html");
+            strcat(copy_head, "Content-Type: text/html\r\n\r\n");
+            send_message(new_socket, path_head, copy_head);
+}
+else if ((parse_ext[0] == 'j' && parse_ext[1] == 'p' && parse_ext[2] == 'g') || (parse_ext[0] == 'J' && parse_ext[1] == 'P' && parse_ext[2] == 'G'))
+{
+            //send image to client
+            char path_head[500] = ".";
+            strcat(path_head, parse_string);
+            strcat(copy_head, "Content-Type: image/jpeg\r\n\r\n");
+            send_message(new_socket, path_head, copy_head);
+}
+else if (parse_ext[strlen(parse_ext)-2] == 'j' && parse_ext[strlen(parse_ext)-1] == 's')
+{
+            //javascript
+            char path_head[500] = ".";
+            strcat(path_head, parse_string);
+            strcat(copy_head, "Content-Type: text/javascript\r\n\r\n");
+            send_message(new_socket, path_head, copy_head);
+}
+else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2] == 's' && parse_ext[strlen(parse_ext)-1] == 's')
+{
+            //css
+            char path_head[500] = ".";
+            strcat(path_head, parse_string);
+            strcat(copy_head, "Content-Type: text/css\r\n\r\n");
+            send_message(new_socket, path_head, copy_head);
+}
+ ```
+ I know you are still wondering the very first request information I mentioned in section 3.2 which contains ```/``` no useful information.  
  
 ## 3.4 Reply to the Client
