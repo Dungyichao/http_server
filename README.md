@@ -3,7 +3,7 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
 [Medium link](https://medium.com/from-the-scratch/http-server-what-do-you-need-to-know-to-build-a-simple-http-server-from-scratch-d1ef8945e4fa)
 , or you can read from the pdf version provided in this tutorial (
 [pdf link](https://github.com/Dungyichao/http_server/blob/master/doc/HTTP%20Server_%20Everything%20you%20need%20to%20know%20to%20Build%20a%20simple%20HTTP%20server%20from%20scratch_pdf2.pdf)
-)
+). The tutorial in the Medium post only gives you a abstract concept and simple implementation but the author doesn't finish it. <b>My tutorial will teach you how to make a fully functional web server. </b> <br />
 
 
 # 1. Basic Knowledge <br />
