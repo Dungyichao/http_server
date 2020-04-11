@@ -177,5 +177,14 @@ else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2]
 </p>
 
 The client's web browser will read line by line and do whatever the html file tells it. When it reads until line 14 (in above image), the client will send request to the server to ask for ```vendor/fontawesome-free/css/all.min.css``` which is a css file. Server than ```parse``` the request, and then classify the request. 
+
+There are multiple file extension we need to take good care of, the following link shows you a list of file extension: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types . We need to first notify the client what kind of content we are going to send so that the client can receive the content accordingly. The notification message looks like the following:
+
+```c++
+HTTP/1.1 200 Ok\r\n
+Content-Type: text/html\r\n\r\n
+```
+You replace the ```text/html``` with the proper MIME Type. 
+
  
 ## 3.4 Reply to the Client
