@@ -169,6 +169,14 @@ else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2]
             strcat(copy_head, "Content-Type: text/css\r\n\r\n");
             send_message(new_socket, path_head, copy_head);
 }
+else if (parse_ext[0] == 'i' && parse_ext[1] == 'c' && parse_ext[2] == 'o')
+{
+            //https://www.cisco.com/c/en/us/support/docs/security/web-security-appliance/117995-qna-wsa-00.html
+            char path_head[500] = ".";
+            strcat(path_head, "/img/favicon.png");
+            strcat(copy_head, "Content-Type: image/vnd.microsoft.icon\r\n\r\n");
+            send_message(new_socket, path_head, copy_head);
+}
  ```
  I know you are still wondering the very first request information I mentioned in section 3.2 which contains ```/``` such a useless information. Actually, it does give us a hint to send it our web page, namely ```index.html```. The client will receive the html file looks like the following
  
@@ -184,7 +192,12 @@ There are multiple file extension we need to take good care of, the following li
 HTTP/1.1 200 Ok\r\n
 Content-Type: text/html\r\n\r\n
 ```
-You replace the ```text/html``` with the proper MIME Type. 
+You need to replace the ```text/html``` with the proper MIME Type according to the file extension. 
+
+While writing this tutorial, a special file extension request from the client ```/favicon.ico```, however, I couldn't find out the file in my website at all (I also look into all html, css, js files). It turns out that every browser will automatically request for ```/favicon.ico``` which is merely an icon for displaying on the browser tab shown in the following
+ <p align="center">
+<img src="/img/ico.JPG" height="95%" width="95%">  
+</p>
 
  
 ## 3.4 Reply to the Client
