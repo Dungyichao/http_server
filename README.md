@@ -5,7 +5,7 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
 [pdf link](https://github.com/Dungyichao/http_server/blob/master/doc/HTTP%20Server_%20Everything%20you%20need%20to%20know%20to%20Build%20a%20simple%20HTTP%20server%20from%20scratch_pdf2.pdf)
 ). The tutorial in the Medium post only gives you a abstract concept and simple implementation but the author doesn't finish it. 
 
-<b>My tutorial will show you how to make a fully functional web server in 200 lines of code. </b> <br />
+<b>My tutorial will show you how to make a fully functional web server in no more than 200 lines of code. </b> <br />
 
 # 1. Basic Knowledge <br />
 In the internet world, there is always a server who can serve multiple clients. For example, Google, Netflix, Facebook... and so on are servers. People like us are client and we can use web browser (Chrome, Edge, Opera, Firefox....) to communicate with servers. <br />
@@ -16,14 +16,16 @@ In the internet world, there is always a server who can serve multiple clients. 
 
 You can make a web server at your home and use your own laptop to access the server through LAN which stands for Local Area Network (having a Wi-Fi router can create a LAN at your home). However, if your html file includes some resources in WAN (Wide Area Network), then you need to be able to access the internet for displaying your html correctly.
 
-What you need is at least one PC or laptop (acts as server) running in Linux (Ubuntu or Debian) which should connect to the router. You can use cell phone as a client.  
+What you need is at least one PC or laptop (acts as server) running in Linux (
+[Ubuntu](https://ubuntu.com/desktop)
+or Debian) which should connect to the router. You can use cell phone as a client.  
 
 # 2. Overview
-We are going to implement code for a http server on Ubuntu Desktop. Please follow the Visual Studio Code official website to create a project (
+We are going to implement code for a http server on Ubuntu Desktop. Please follow the <b>Visual Studio Code</b> official website to create a project (
 [link](https://code.visualstudio.com/docs/cpp/config-linux)
 ). Download the web content (Demo website: https://npcasc2020.firebaseapp.com/)  which provide to you in this tutorial folder src (
 [link](https://github.com/Dungyichao/http_server/blob/master/src/Web_Content_1.zip)
-). Unzip the content and put all the content into your code project. It will be like the following image.
+). Unzip the content and put all the content into your code project. It will be like the following image. (Notice that we do all the coding and compiling on Ubuntu Desktop)
 
 <p align="center">
 <img src="/img/project_folder.JPG" height="90%" width="90%">  
