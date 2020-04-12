@@ -8,14 +8,17 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
 <b>My tutorial will show you how to make a fully functional web server in no more than 200 lines of code. </b> I also provide ```Node.js``` javascript code of building a simpler web server in the Summary section. <br />
 
 [1. Basic Knowledge](https://github.com/Dungyichao/http_server/blob/master/README.md#1-basic-knowledge-)
+
 [2. Overview](https://github.com/Dungyichao/http_server/blob/master/README.md#2-overview)
     [2.1 System Requirement](https://github.com/Dungyichao/http_server/blob/master/README.md#21-system-requirement)
     [2.2 Process Elements](https://github.com/Dungyichao/http_server/blob/master/README.md#22-process-elements)
+    
 [3. Implement the Code](https://github.com/Dungyichao/http_server/blob/master/README.md#3-implement-the-code)
     [3.1 Code Structure](https://github.com/Dungyichao/http_server/blob/master/README.md#31-code-structure)
     [3.2 Parse the Request from the Client](https://github.com/Dungyichao/http_server/blob/master/README.md#32-parse-the-request-from-the-client)
     [3.3 Classify the Request](https://github.com/Dungyichao/http_server/blob/master/README.md#33-classify-the-request)
     [3.4 Reply to the Client](https://github.com/Dungyichao/http_server/blob/master/README.md#34-reply-to-the-client)
+    
 [4. Summary](https://github.com/Dungyichao/http_server/blob/master/README.md#4-summary)
 
 # 1. Basic Knowledge <br />
