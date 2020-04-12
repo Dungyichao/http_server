@@ -324,6 +324,7 @@ Is there a simple way? Yes, you can use Node.js which is a JavaScript runtime en
 const http = require('http');
 
 const server = http.createServer((req, res) => {
+    console.log(req);
     if (req.url === '/'){
         res.end('<h1>some txt<h1>');
     }
@@ -331,5 +332,5 @@ const server = http.createServer((req, res) => {
 
 const PORT = process.env.PORT || 8081;
 
-Server.listen(PORT, () => console.log(`Server is running and port is ${PORT}`));
+server.listen(PORT, () => console.log(`Server is running and port is ${PORT}`));
 ```
