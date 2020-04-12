@@ -318,3 +318,18 @@ You might not familiar with the above command, so the following link may help yo
 
 # 4. Summary
 This is a simple, experimental but functional Ubuntu web server. Some error protection method not inclue. Any advise are welcome. I also want to implment a <b>webcam</b> server sending real-time streaming. 
+
+Is there a simple way? Yes, you can use Node.js which is a JavaScript runtime environment where you can build a simple web server in less than 20 lines of code. 
+```javascript
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+    if (req.url === '/'){
+        res.end('<h1>some txt<h1>');
+    }
+});
+
+const PORT = process.env.PORT || 8081;
+
+Server.listen(PORT, () => console.log(`Server is running and port is ${PORT}`));
+```
