@@ -319,33 +319,66 @@ You might not familiar with the above command, so the following link may help yo
 # 4. Summary
 This is a simple, experimental but functional Ubuntu web server. Some error protection method not inclue. Any advise are welcome. I also want to implment a <b>webcam</b> server sending real-time streaming. 
 
-Is there a simple way? Yes, you can use <b>```Node.js```</b> which is a JavaScript runtime environment where you can build a simple web server in less than 30 lines of code. (Youtube Node.js Crash Course: https://www.youtube.com/watch?v=fBNz5xF-Kx4)
+Is there a simple way? Yes, you can use <b>```Node.js```</b> which is a JavaScript runtime environment where you can build a simple web server in about 60 lines of code. (Youtube Node.js Crash Course: https://www.youtube.com/watch?v=fBNz5xF-Kx4)
 ```javascript
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
 
 const server = http.createServer((req, res) => {
-    console.log(req);
-    if (req.url === '/'){
-        fs.readFile(path.join(__dirname, 'index.html'), 
-        (err, content) => {
-            if(err) throw err;
-            res.writeHead(200, {'Content-Type': 'text/html'});
-            res.end(content);
-        })
+    let filePath = path.join(__dirname, req.url === '/' ? 'index.html' : req.url);
+    let file_extname = path.extname(filePath);
+    let contentType = 'text/html';
+
+    switch(file_extname){
+        case '.js':
+            contentType = 'text/javascript';
+            break;
+        case '.css':
+            contentType = 'text/css';
+            break;
+        case '.json':
+            contentType = 'application/json';
+            break;
+        case '.png':
+            contentType = 'image/png';
+            break;
+        case '.JPG':
+            contentType = 'image/jpg';
+            break;
+        case '.ico':
+            filePath = path.join(__dirname,'favicon.png');
+            contentType = 'image/png';
+            break;
+        case '.ttf':
+            contentType = 'font/ttf';
+            break;
+        case '.woff':
+            contentType = 'font/woff';
+            break;
+        case '.woff2':
+            contentType = 'font/woff2';
+            break;
     }
-    if (req.url === '/api/users'){
-        const users = [
-            {name: 'Bob', age: 40},
-            {name: 'Smith', age: 30}
-        ];
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify(users));    
-    }
+    // Read File
+    fs.readFile(filePath, (err, content) => {
+        if(err){
+            if(err.code == 'ENOENT'){
+                console.log('Page not found');
+            }
+            else{
+                res.writeHead(500);
+                res.end('Server Error: ${err.code}');
+            }
+        }
+        else{
+            res.writeHead(200, {'Content-Type': contentType});
+            res.end(content);    
+        }
+    });
 });
 
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8080;
 
 server.listen(PORT, () => console.log(`Server is running and port is ${PORT}`));
 ```
