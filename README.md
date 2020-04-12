@@ -319,7 +319,7 @@ You might not familiar with the above command, so the following link may help yo
 # 4. Summary
 This is a simple, experimental but functional Ubuntu web server. Some error protection method not inclue. Any advise are welcome. I also want to implment a <b>webcam</b> server sending real-time streaming. 
 
-Is there a simple way? Yes, you can use <b>```Node.js```</b> which is a JavaScript runtime environment where you can build a simple web server in less than 20 lines of code. 
+Is there a simple way? Yes, you can use <b>```Node.js```</b> which is a JavaScript runtime environment where you can build a simple web server in less than 30 lines of code. (Youtube Node.js Crash Course: https://www.youtube.com/watch?v=fBNz5xF-Kx4)
 ```javascript
 const http = require('http');
 const path = require('path');
@@ -334,6 +334,14 @@ const server = http.createServer((req, res) => {
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.end(content);
         })
+    }
+    if (req.url === '/api/users'){
+        const users = [
+            {name: 'Bob', age: 40},
+            {name: 'Smith', age: 30}
+        ];
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify(users));    
     }
 });
 
