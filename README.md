@@ -5,7 +5,7 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
 [pdf link](https://github.com/Dungyichao/http_server/blob/master/doc/HTTP%20Server_%20Everything%20you%20need%20to%20know%20to%20Build%20a%20simple%20HTTP%20server%20from%20scratch_pdf2.pdf)
 ). The tutorial in the Medium post only gives you a abstract concept and simple implementation but the author doesn't finish it. 
 
-<b>My tutorial will show you how to make a fully functional web server in no more than 200 lines of code. </b> I also provide ```Node.js``` code of building a simpler web server in the Summary section. <br />
+<b>My tutorial will show you how to make a fully functional web server in no more than 200 lines of code. </b> I also provide ```Node.js``` javascript code of building a simpler web server in the Summary section. <br />
 
 # 1. Basic Knowledge <br />
 In the internet world, there is always a server who can serve multiple clients. For example, Google, Netflix, Facebook... and so on are servers. People like us are client and we can use web browser (Chrome, Edge, Opera, Firefox....) to communicate with servers. <br />
