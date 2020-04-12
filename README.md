@@ -322,11 +322,18 @@ This is a simple, experimental but functional Ubuntu web server. Some error prot
 Is there a simple way? Yes, you can use <b>```Node.js```</b> which is a JavaScript runtime environment where you can build a simple web server in less than 20 lines of code. 
 ```javascript
 const http = require('http');
+const path = require('path');
+const fs = require('fs');
 
 const server = http.createServer((req, res) => {
     console.log(req);
     if (req.url === '/'){
-        res.end('<h1>some txt<h1>');
+        fs.readFile(path.join(__dirname, 'index.html'), 
+        (err, content) => {
+            if(err) throw err;
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            res.end(content);
+        })
     }
 });
 
