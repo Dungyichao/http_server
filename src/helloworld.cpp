@@ -218,7 +218,12 @@ int send_message(int fd, char image_path[], char head[]){
     //printf("image total byte st_size: %d\n", stat_buf.st_size);
 
     while(img_total_size > 0){
-        sendfile(fd, fdimg, NULL, block_size);
+        if(img_total_size < block_size){
+            sendfile(fd, fdimg, NULL, img_total_size);
+        }
+        else{
+            sendfile(fd, fdimg, NULL, block_size);
+        }       
         img_total_size = img_total_size - block_size;
     }
     close(fdimg);
