@@ -411,7 +411,7 @@ Streaming is a way of delivering visual and audio media to users over the Intern
     <tbody>
         <tr>
             <td align="center">Server</td>
-            <td align="Left">Because HLS is based on HTTP, any ordinary web server can originate the stream. Two main processes take place on the server: <br /><br />  <b>Encoding</b>: H.264 or H.265 encoding <br /> <b>Segmenting</b>: The video is divided up into segments a few seconds in length. The length of the segments can vary, although the default length is 10 seconds. In addition to dividing the video into segments, HLS creates an <b>index file</b> of the video segments to record the order they belong in. HLS will also create several duplicate sets of segments at different quality levels: 480p, 720p, 1080p, and so on.</td>
+            <td align="Left">Because HLS is based on HTTP, any ordinary web server can originate the stream. Two main processes take place on the server: <br /><br />  <b>Encoding</b>: H.264 or H.265 encoding <br /> <b>Segmenting</b>: The video is divided up into segments a few seconds in length. The length of the segments can vary, although the default length is 10 seconds. In addition to dividing the video into segments, HLS creates an <b>index file</b> of the video segments to record the order they belong in. HLS will also create several duplicate sets of segments at different quality levels: 480p, 720p, 1080p, and so on. <br /> Container format: Common container formats include .mp4, .m4v, and .avi. In essence, a container format functions like a “box” that contains (usually) a video file, an audio file, and metadata.</td>
         </tr>
         <tr>
             <td align="center">Distribution</td>
