@@ -291,9 +291,17 @@ int send_message(int fd, char image_path[], char head[]){
     int img_total_size = stat_buf.st_size;
     int block_size = stat_buf.st_blksize;
 
+    int sent_size;
+
     while(img_total_size > 0){
-        sendfile(fd, fdimg, NULL, block_size);
-        img_total_size = img_total_size - block_size;
+        if(img_total_size < block_size){
+            sent_size = sendfile(fd, fdimg, NULL, img_total_size);            
+        }
+        else{
+            sent_size = sendfile(fd, fdimg, NULL, block_size);
+        }       
+        printf("%d \n", sent_size);
+        img_total_size = img_total_size - sent_size;
     }
     close(fdimg);
 }
