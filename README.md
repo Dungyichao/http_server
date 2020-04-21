@@ -17,6 +17,8 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
     * 3.3 [Classify the Request](https://github.com/Dungyichao/http_server/blob/master/README.md#33-classify-the-request) 
     * 3.4 [Reply to the Client](https://github.com/Dungyichao/http_server/blob/master/README.md#34-reply-to-the-client)     
 4. [Summary (with javascript)](https://github.com/Dungyichao/http_server/blob/master/README.md#4-summary)
+--------------Advance----------------
+5. HTTP Live Streaming (HLS)
 
 # 1. Basic Knowledge <br />
 In the internet world, there is always a server who can serve multiple clients. For example, Google, Netflix, Facebook... and so on are servers. People like us are client and we can use web browser (Chrome, Edge, Opera, Firefox....) to communicate with servers. <br />
@@ -393,3 +395,7 @@ const PORT = process.env.PORT || 8080;
 
 server.listen(PORT, () => console.log(`Server is running and port is ${PORT}`));
 ```
+
+# 5. HTTP Live Streaming (HLS)
+Streaming is a way of delivering visual and audio media to users over the Internet. It works by continually sending the media file to a user's device a little bit at a time instead of all at once. With streaming over HTTP, the standard request-response pattern does not apply. The connection between client and server remains open for the duration of the stream, and the server pushes video data to the client so that the client does not have to request every segment of video data. (Reference link: https://www.cloudflare.com/learning/video/what-is-http-live-streaming/ ).
+
