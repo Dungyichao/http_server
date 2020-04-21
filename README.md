@@ -397,7 +397,7 @@ server.listen(PORT, () => console.log(`Server is running and port is ${PORT}`));
 ```
 
 # 5. Video Streaming Protocols
-We will introduce some most common streaming protocols and most widely used in current time. 
+The following are some most common streaming protocols and most widely used in current time. However, we will only focus on the HLS.  
 <p align="center">
 <table>
     <thead>
@@ -423,12 +423,10 @@ We will introduce some most common streaming protocols and most widely used in c
 </table>
 </p>
 
-## 5.1 Real-Time Streaming Protocol (RTSP)
-
-## 5.2 HTTP Live Streaming (HLS)
+## 5.1 HTTP Live Streaming (HLS)
 Streaming is a way of delivering visual and audio media to users over the Internet. It works by continually sending the media file to a user's device a little bit at a time instead of all at once. With streaming over HTTP, the standard request-response pattern does not apply. <b>The connection between client and server remains open for the duration of the stream</b>, and the server pushes video data to the client so that the client does not have to request every segment of video data. HLS use TCP (more reliable) rather than UDP (more faster) as trasport protocols. (Reference link: https://www.cloudflare.com/learning/video/what-is-http-live-streaming/ ).
 
-### 5.2.1 Elements and Roles
+### 5.1.1 Elements and Roles
 <p align="center">
 <table>
     <thead>
@@ -457,5 +455,5 @@ Streaming is a way of delivering visual and audio media to users over the Intern
 </table>
 </p>
 
-### 5.2.2 Bitrate Streaming
+### 5.1.2 Bitrate Streaming
 This refers to the ability to adjust video quality in the middle of a stream as network conditions change. This ability allows videos to keep playing even if network conditions get worse; conversely, it also maximizes video quality to be as high as the network can support. Adaptive bitrate streaming is possible because HLS creates several duplicate segmented streams at different quality levels during the segmentation process. 
