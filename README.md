@@ -396,10 +396,39 @@ const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => console.log(`Server is running and port is ${PORT}`));
 ```
 
-# 5. HTTP Live Streaming (HLS)
+# 5. Video Streaming Protocols
+We will introduce some most common streaming protocols and most widely used in current time. 
+<p align="center">
+<table>
+    <thead>
+        <tr>
+            <th align="center">Protocols</th>
+            <th align="center">Detail</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">Real-Time Messaging Protocol (RTMP)</td>
+            <td align="Left">Today it’s mostly used for ingesting live streams. In plain terms, when you set up your encoder to send your video feed to your video hosting platform, that video will reach the CDN via the RTMP protocol. However, that content eventually reaches the end viewer in another protocol – usually HLS streaming protocol.</td>
+        </tr>
+        <tr>
+            <td align="center">Real-Time Streaming Protocol (RTSP)</td>
+            <td align="Left">It is a good choice for streaming use cases such as IP camera feeds (e.g. security cameras), IoT devices (e.g. laptop-controlled drone), and mobile SDKs.</td>
+        </tr>
+        <tr>
+            <td align="center">HTTP Live Streaming (HLS)</td>
+            <td align="Left">HLS is the most widely-used protocol today, and it’s robust. Currently, the only downside of HLS is that latency can be relatively high.</td>
+        </tr>        
+    </tbody>
+</table>
+</p>
+
+## 5.1 Real-Time Streaming Protocol (RTSP)
+
+## 5.2 HTTP Live Streaming (HLS)
 Streaming is a way of delivering visual and audio media to users over the Internet. It works by continually sending the media file to a user's device a little bit at a time instead of all at once. With streaming over HTTP, the standard request-response pattern does not apply. <b>The connection between client and server remains open for the duration of the stream</b>, and the server pushes video data to the client so that the client does not have to request every segment of video data. HLS use TCP (more reliable) rather than UDP (more faster) as trasport protocols. (Reference link: https://www.cloudflare.com/learning/video/what-is-http-live-streaming/ ).
 
-## 5.1 Elements and Roles
+### 5.2.1 Elements and Roles
 <p align="center">
 <table>
     <thead>
@@ -428,5 +457,5 @@ Streaming is a way of delivering visual and audio media to users over the Intern
 </table>
 </p>
 
-## 5.2 Bitrate Streaming
+### 5.2.2 Bitrate Streaming
 This refers to the ability to adjust video quality in the middle of a stream as network conditions change. This ability allows videos to keep playing even if network conditions get worse; conversely, it also maximizes video quality to be as high as the network can support. Adaptive bitrate streaming is possible because HLS creates several duplicate segmented streams at different quality levels during the segmentation process. 
