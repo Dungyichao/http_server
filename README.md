@@ -397,5 +397,31 @@ server.listen(PORT, () => console.log(`Server is running and port is ${PORT}`));
 ```
 
 # 5. HTTP Live Streaming (HLS)
-Streaming is a way of delivering visual and audio media to users over the Internet. It works by continually sending the media file to a user's device a little bit at a time instead of all at once. With streaming over HTTP, the standard request-response pattern does not apply. The connection between client and server remains open for the duration of the stream, and the server pushes video data to the client so that the client does not have to request every segment of video data. (Reference link: https://www.cloudflare.com/learning/video/what-is-http-live-streaming/ ).
+Streaming is a way of delivering visual and audio media to users over the Internet. It works by continually sending the media file to a user's device a little bit at a time instead of all at once. With streaming over HTTP, the standard request-response pattern does not apply. <b>The connection between client and server remains open for the duration of the stream</b>, and the server pushes video data to the client so that the client does not have to request every segment of video data. (Reference link: https://www.cloudflare.com/learning/video/what-is-http-live-streaming/ ).
+
+## 5.1 Elements and Roles
+<p align="center">
+<table>
+    <thead>
+        <tr>
+            <th align="center">Element</th>
+            <th align="center">Roles</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">Server</td>
+            <td align="Left">Because HLS is based on HTTP, any ordinary web server can originate the stream. Two main processes take place on the server: <br /> <b>Encoding</b>: H.264 or H.265 encoding <br /> <b>Segmenting</b>: The video is divided up into segments a few seconds in length. The length of the segments can vary, although the default length is 10 seconds. In addition to dividing the video into segments, HLS creates an index file of the video segments to record the order they belong in. HLS will also create several duplicate sets of segments at different quality levels: 480p, 720p, 1080p, and so on.</td>
+        </tr>
+        <tr>
+            <td align="center">Distribution</td>
+            <td align="Left">The encoded video segments are pushed out to client devices over the Internet when client devices request the stream. Typically, a <b>content delivery network (CDN)</b> will help distribute the stream to geographically diverse areas. A CDN will also cache the stream to serve it to clients even more quickly.</td>
+        </tr>
+        <tr>
+            <td align="center">Client device</td>
+            <td align="Left">Ex. smartphone or laptop. The client device uses the index file as a reference for assembling the video in order, and it switches from higher quality to lower quality picture (and vice versa) as needed.</td>
+        </tr>        
+    </tbody>
+</table>
+</p>
 
