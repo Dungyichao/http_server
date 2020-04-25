@@ -9,26 +9,16 @@
 #include <sys/sendfile.h>
 #include <sys/stat.h>
 #include "json.hpp"
-
+#include <arpa/inet.h> //https://www.systutorials.com/docs/linux/man/0p-arpa_inet/
+//https://github.com/nlohmann/json
 using json = nlohmann::json;
 
-//#include <fstream>
-//#include <sstream>
-//#include <arpa/inet.h>
-//#include <string>
-//#include <netdb.h>
-//#include <unistd.h>
-//using namespace std;
 
 #define PORT 8081
 
 char* parse(char line[], const char symbol[]);
 int send_message(int fd, char image_path[], char head[]);
-//void setHttpHeader_other(char httpHeader[], char *path);
-//void setHttpHeader(char httpHeader[]);
-//void report(struct sockaddr_in *serverAddress);
-/*std::string read_image(const std::string& image_path);
-int send_image(int & fd, std::string& image);*/
+
 
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
 //https://stackoverflow.com/questions/45670369/c-web-server-image-not-showing-up-on-browser
@@ -38,14 +28,15 @@ char http_header[25] = "HTTP/1.1 200 Ok\r\n";
 
 int main(int argc, char const *argv[])
 {
-	json j;
+	//json j;
+	int kkk = 33;
 	json j2 = {
 		{"pi", 3.141},
 		{"happy", true},
 		{"name", "Niels"},
 		{"nothing", nullptr},
 		{"answer", {
-			{"everything", 42}
+			{"everything", kkk}
 		}},
 		{"list", {1, 0, 2}},
 			{"object", {
@@ -57,9 +48,6 @@ int main(int argc, char const *argv[])
 	long valread;
 	struct sockaddr_in address;
 	int addrlen = sizeof(address);
-
-	//char httpHeader[100000] = "HTTP/1.1 200 OK\r\n\n";
-	//char httpHeader1[800000] = "HTTP/1.1 200 OK\r\n\n";
 
 	// Creating socket file descriptor
 	if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
@@ -92,11 +80,27 @@ int main(int argc, char const *argv[])
 	while (1)
 	{
 		printf("\n+++++++ Waiting for new connection ++++++++\n\n");
+		
 		if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0)
 		{
 			perror("In accept");
 			exit(EXIT_FAILURE);
 		}
+
+		//https://stackoverflow.com/questions/3060950/how-to-get-ip-address-from-sock-structure-in-c
+		struct sockaddr_in* pV4Addr = (struct sockaddr_in*)&address;
+		struct in_addr ipAddr = pV4Addr->sin_addr;
+		char str[INET_ADDRSTRLEN];
+		inet_ntop(AF_INET, &ipAddr, str, INET_ADDRSTRLEN);  //#include <arpa/inet.h>
+		printf("Client IP: %s", str);
+
+		/* IPv6
+		struct sockaddr_in6* pV6Addr = (struct sockaddr_in6*)&client_addr;
+		struct in6_addr ipAddr = pV6Addr->sin6_addr;
+		char str[INET6_ADDRSTRLEN];
+		inet_ntop( AF_INET6, &ipAddr, str, INET6_ADDRSTRLEN );
+		*/
+
 
 		char buffer[30000] = { 0 };
 		valread = read(new_socket, buffer, 30000);
@@ -124,12 +128,11 @@ int main(int argc, char const *argv[])
 			//write(new_socket , httpHeader , strlen(httpHeader));
 			char s[6] = "Hello";
 			char path_head[500] = ".";
-			
+
 			//https://www.techiedelight.com/convert-string-char-array-cpp/
 			std::string ss = j2.dump();
 			char cstr[ss.size() + 1];
 			strcpy(cstr, ss.c_str());
-
 
 			strcat(copy_head, "Content-Type: application/json\r\n\r\n");
 			write(new_socket, copy_head, strlen(copy_head));
@@ -258,4 +261,3 @@ int send_message(int fd, char image_path[], char head[]) {
 	}
 	close(fdimg);
 }
-
