@@ -172,6 +172,8 @@ int main(int argc, char const *argv[])
         }
         printf("\n------------------Server sent----------------------------------------------------\n");
         close(new_socket);
+        free(copy);
+        free(copy_head);
     }
     return 0;
 }
