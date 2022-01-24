@@ -21,6 +21,7 @@
 #define PORT 8080
 
 char* parse(char line[], const char symbol[]);
+char* parse_method(char line[], const char symbol[]);
 int send_message(int fd, char image_path[], char head[]);
 //void setHttpHeader_other(char httpHeader[], char *path);
 //void setHttpHeader(char httpHeader[]);
@@ -84,8 +85,10 @@ int main(int argc, char const *argv[])
         char buffer[30000] = {0};
         valread = read( new_socket , buffer, 30000);
 
-        printf("\n%s \n ", buffer);
-        
+        printf("\n buffer message: %s \n ", buffer);
+        char *parse_string_method = parse_method(buffer, " ");  //Try to get the path which the client ask for
+        printf("Client method: %s\n", parse_string_method);
+               
         //char httpHeader1[800021] = "HTTP/1.1 200 OK\r\n\n";
 
         char *parse_string = parse(buffer, " ");  //Try to get the path which the client ask for
@@ -203,6 +206,27 @@ char* parse(char line[], const char symbol[])
     while( token != NULL ) {
       
       token = strtok(NULL, " ");
+      if(current == 0){
+          message = token;
+          return message;
+      }
+      current = current + 1;
+   }
+   return message;
+}
+
+char* parse_method(char line[], const char symbol[])
+{
+    char *copy = (char *)malloc(strlen(line) + 1);
+    strcpy(copy, line);
+        
+    char *message;
+    char * token = strtok(copy, symbol);
+    int current = 0;
+
+    while( token != NULL ) {
+      
+      //token = strtok(NULL, " ");
       if(current == 0){
           message = token;
           return message;
