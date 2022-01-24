@@ -273,6 +273,14 @@ Here we list out some common file extension and their MIME Type.
             <td align="center">.mpeg</td>
             <td align="Left">video/mpeg</td>
         </tr>
+       <tr>
+            <td align="center">.m3u8</td>
+            <td align="Left">application/vnd.apple.mpegurl</td>
+        </tr>
+       <tr>
+            <td align="center">.ts</td>
+            <td align="Left">video/mp2t</td>
+        </tr>
     </tbody>
 </table>
 </p>
