@@ -158,6 +158,22 @@ int main(int argc, char const *argv[])
             strcat(copy_head, "Content-Type: font/woff\r\n\r\n");
             send_message(new_socket, path_head, copy_head);
         }
+        else if (parse_ext[0] == 'm' && parse_ext[1] == '3' && parse_ext[2] == 'u' && parse_ext[3] == '8')
+        {
+            //Web Open m3u8
+            char path_head[500] = ".";
+            strcat(path_head, parse_string);
+            strcat(copy_head, "Content-Type: application/vnd.apple.mpegurl\r\n\r\n");
+            send_message(new_socket, path_head, copy_head);
+        }
+        else if (parse_ext[0] == 't' && parse_ext[1] == 's')
+        {
+            //Web Open ts
+            char path_head[500] = ".";
+            strcat(path_head, parse_string);
+            strcat(copy_head, "Content-Type: video/mp2t\r\n\r\n");
+            send_message(new_socket, path_head, copy_head);
+        }
         else{
             //send other file 
             char path_head[500] = ".";
@@ -212,6 +228,10 @@ int send_message(int fd, char image_path[], char head[]){
     write(fd, head, strlen(head));
 
     int fdimg = open(image_path, O_RDONLY);
+    
+    if(fdimg < 0){
+        printf("Cannot Open file path : %s with error %d\n", image_path, fdimg); 
+    }
      
     fstat(fdimg, &stat_buf);
     int img_total_size = stat_buf.st_size;
