@@ -9,6 +9,8 @@
 #include <fcntl.h>
 #include <sys/sendfile.h>
 #include <sys/stat.h>
+#include <errno.h>
+
 
 //#include <fstream>
 //#include <sstream>
@@ -18,10 +20,11 @@
 //#include <unistd.h>
 //using namespace std;
 
-#define PORT 8080
+#define PORT 8081
 
 char* parse(char line[], const char symbol[]);
 char* parse_method(char line[], const char symbol[]);
+char* find_token(char line[], const char symbol[], const char match[]);
 int send_message(int fd, char image_path[], char head[]);
 //void setHttpHeader_other(char httpHeader[], char *path);
 //void setHttpHeader(char httpHeader[]);
@@ -41,9 +44,6 @@ int main(int argc, char const *argv[])
     long valread;
     struct sockaddr_in address;
     int addrlen = sizeof(address);
-    
-    //char httpHeader[100000] = "HTTP/1.1 200 OK\r\n\n";
-    //char httpHeader1[800000] = "HTTP/1.1 200 OK\r\n\n";
     
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
@@ -71,7 +71,6 @@ int main(int argc, char const *argv[])
     
     //report(&address);
     //setHttpHeader(httpHeader);
-    //int write_ok;
     
     while(1)
     {
@@ -88,7 +87,7 @@ int main(int argc, char const *argv[])
         printf("\n buffer message: %s \n ", buffer);
         char *parse_string_method = parse_method(buffer, " ");  //Try to get the path which the client ask for
         printf("Client method: %s\n", parse_string_method);
-               
+        
         //char httpHeader1[800021] = "HTTP/1.1 200 OK\r\n\n";
 
         char *parse_string = parse(buffer, " ");  //Try to get the path which the client ask for
@@ -104,103 +103,114 @@ int main(int argc, char const *argv[])
         char *copy_head = (char *)malloc(strlen(http_header) +200);
         strcpy(copy_head, http_header);
         
-        //https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-        if(strlen(parse_string) <= 1){
-            //case that the parse_string = "/"  --> Send index.html file
-            //write(new_socket , httpHeader , strlen(httpHeader));
-            char path_head[500] = ".";
-            strcat(path_head, "/index.html");
-            strcat(copy_head, "Content-Type: text/html\r\n\r\n");
-            send_message(new_socket, path_head, copy_head);
+        if(parse_string_method[0] == 'G' && parse_string_method[1] == 'E' && parse_string_method[2] == 'T'){
+            //https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+            if(strlen(parse_string) <= 1){
+                //case that the parse_string = "/"  --> Send index.html file
+                //write(new_socket , httpHeader , strlen(httpHeader));
+                char path_head[500] = ".";
+                strcat(path_head, "/index.html");
+                strcat(copy_head, "Content-Type: text/html\r\n\r\n");
+                send_message(new_socket, path_head, copy_head);
+            }
+            else if ((parse_ext[0] == 'j' && parse_ext[1] == 'p' && parse_ext[2] == 'g') || (parse_ext[0] == 'J' && parse_ext[1] == 'P' && parse_ext[2] == 'G'))
+            {
+                //send image to client
+                char path_head[500] = ".";
+                strcat(path_head, parse_string);
+                strcat(copy_head, "Content-Type: image/jpeg\r\n\r\n");
+                send_message(new_socket, path_head, copy_head);
+            }
+            else if (parse_ext[0] == 'i' && parse_ext[1] == 'c' && parse_ext[2] == 'o')
+            {
+                //https://www.cisco.com/c/en/us/support/docs/security/web-security-appliance/117995-qna-wsa-00.html
+                char path_head[500] = ".";
+                strcat(path_head, "/img/favicon.png");
+                strcat(copy_head, "Content-Type: image/vnd.microsoft.icon\r\n\r\n");
+                send_message(new_socket, path_head, copy_head);
+            }
+            else if (parse_ext[0] == 't' && parse_ext[1] == 't' && parse_ext[2] == 'f')
+            {
+                //font type, to display icon from FontAwesome
+                char path_head[500] = ".";
+                strcat(path_head, parse_string);
+                strcat(copy_head, "Content-Type: font/ttf\r\n\r\n");
+                send_message(new_socket, path_head, copy_head);
+            }
+            else if (parse_ext[strlen(parse_ext)-2] == 'j' && parse_ext[strlen(parse_ext)-1] == 's')
+            {
+                //javascript
+                char path_head[500] = ".";
+                strcat(path_head, parse_string);
+                strcat(copy_head, "Content-Type: text/javascript\r\n\r\n");
+                send_message(new_socket, path_head, copy_head);
+            }
+            else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2] == 's' && parse_ext[strlen(parse_ext)-1] == 's')
+            {
+                //css
+                char path_head[500] = ".";
+                strcat(path_head, parse_string);
+                strcat(copy_head, "Content-Type: text/css\r\n\r\n");
+                send_message(new_socket, path_head, copy_head);
+            }
+            else if (parse_ext[0] == 'w' && parse_ext[1] == 'o' && parse_ext[2] == 'f')
+            {
+                //Web Open Font Format woff and woff2
+                char path_head[500] = ".";
+                strcat(path_head, parse_string);
+                strcat(copy_head, "Content-Type: font/woff\r\n\r\n");
+                send_message(new_socket, path_head, copy_head);
+            }
+            else if (parse_ext[0] == 'm' && parse_ext[1] == '3' && parse_ext[2] == 'u' && parse_ext[3] == '8')
+            {
+                //Web Open m3u8
+                char path_head[500] = ".";
+                strcat(path_head, parse_string);
+                strcat(copy_head, "Content-Type: application/vnd.apple.mpegurl\r\n\r\n");
+                send_message(new_socket, path_head, copy_head);
+            }
+            else if (parse_ext[0] == 't' && parse_ext[1] == 's')
+            {
+                //Web Open ts
+                char path_head[500] = ".";
+                strcat(path_head, parse_string);
+                strcat(copy_head, "Content-Type: video/mp2t\r\n\r\n");
+                send_message(new_socket, path_head, copy_head);
+            }
+            else{
+                //send other file 
+                char path_head[500] = ".";
+                strcat(path_head, parse_string);
+                strcat(copy_head, "Content-Type: text/plain\r\n\r\n");
+                send_message(new_socket, path_head, copy_head);
+                printf("Else: %s \n", parse_string);        
+            }
+            printf("\n------------------Server sent----------------------------------------------------\n");
         }
-        else if ((parse_ext[0] == 'j' && parse_ext[1] == 'p' && parse_ext[2] == 'g') || (parse_ext[0] == 'J' && parse_ext[1] == 'P' && parse_ext[2] == 'G'))
-        {
-            //send image to client
-            char path_head[500] = ".";
-            strcat(path_head, parse_string);
-            strcat(copy_head, "Content-Type: image/jpeg\r\n\r\n");
-            send_message(new_socket, path_head, copy_head);
+        else if (parse_string_method[0] == 'P' && parse_string_method[1] == 'O' && parse_string_method[2] == 'S' && parse_string_method[3] == 'T'){
+            char *find_string = malloc(200);
+            find_string = find_token(buffer, "\r\n", "action");
+            strcat(copy_head, "Content-Type: text/plain \r\n\r\n"); //\r\n\r\n
+            //strcat(copy_head, "Content-Length: 12 \n");
+            strcat(copy_head, "User Action: ");
+            printf("find string: %s \n", find_string);
+            strcat(copy_head, find_string);
+            write(new_socket, copy_head, strlen(copy_head));
         }
-        else if (parse_ext[0] == 'i' && parse_ext[1] == 'c' && parse_ext[2] == 'o')
-        {
-            //https://www.cisco.com/c/en/us/support/docs/security/web-security-appliance/117995-qna-wsa-00.html
-            char path_head[500] = ".";
-            strcat(path_head, "/img/favicon.png");
-            strcat(copy_head, "Content-Type: image/vnd.microsoft.icon\r\n\r\n");
-            send_message(new_socket, path_head, copy_head);
-        }
-        else if (parse_ext[0] == 't' && parse_ext[1] == 't' && parse_ext[2] == 'f')
-        {
-            //font type, to display icon from FontAwesome
-            char path_head[500] = ".";
-            strcat(path_head, parse_string);
-            strcat(copy_head, "Content-Type: font/ttf\r\n\r\n");
-            send_message(new_socket, path_head, copy_head);
-        }
-        else if (parse_ext[strlen(parse_ext)-2] == 'j' && parse_ext[strlen(parse_ext)-1] == 's')
-        {
-            //javascript
-            char path_head[500] = ".";
-            strcat(path_head, parse_string);
-            strcat(copy_head, "Content-Type: text/javascript\r\n\r\n");
-            send_message(new_socket, path_head, copy_head);
-        }
-        else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2] == 's' && parse_ext[strlen(parse_ext)-1] == 's')
-        {
-            //css
-            char path_head[500] = ".";
-            strcat(path_head, parse_string);
-            strcat(copy_head, "Content-Type: text/css\r\n\r\n");
-            send_message(new_socket, path_head, copy_head);
-        }
-        else if (parse_ext[0] == 'w' && parse_ext[1] == 'o' && parse_ext[2] == 'f')
-        {
-            //Web Open Font Format woff and woff2
-            char path_head[500] = ".";
-            strcat(path_head, parse_string);
-            strcat(copy_head, "Content-Type: font/woff\r\n\r\n");
-            send_message(new_socket, path_head, copy_head);
-        }
-        else if (parse_ext[0] == 'm' && parse_ext[1] == '3' && parse_ext[2] == 'u' && parse_ext[3] == '8')
-        {
-            //Web Open m3u8
-            char path_head[500] = ".";
-            strcat(path_head, parse_string);
-            strcat(copy_head, "Content-Type: application/vnd.apple.mpegurl\r\n\r\n");
-            send_message(new_socket, path_head, copy_head);
-        }
-        else if (parse_ext[0] == 't' && parse_ext[1] == 's')
-        {
-            //Web Open ts
-            char path_head[500] = ".";
-            strcat(path_head, parse_string);
-            strcat(copy_head, "Content-Type: video/mp2t\r\n\r\n");
-            send_message(new_socket, path_head, copy_head);
-        }
-        else{
-            //send other file 
-            char path_head[500] = ".";
-            strcat(path_head, parse_string);
-            strcat(copy_head, "Content-Type: text/plain\r\n\r\n");
-            send_message(new_socket, path_head, copy_head);
-            
-            printf("Else: %s \n", parse_string);
-
-            //setHttpHeader_other(httpHeader1, parse_string);
-            //write(new_socket , httpHeader1 , strlen(httpHeader1));         
-        }
-        printf("\n------------------Server sent----------------------------------------------------\n");
         close(new_socket);
         free(copy);
-        free(copy_head);
+        free(copy_head);  
     }
     return 0;
 }
 
 char* parse(char line[], const char symbol[])
 {
+    char *copy = (char *)malloc(strlen(line) + 1);
+    strcpy(copy, line);
+    
     char *message;
-    char * token = strtok(line, symbol);
+    char * token = strtok(copy, symbol);
     int current = 0;
 
     while( token != NULL ) {
@@ -212,6 +222,8 @@ char* parse(char line[], const char symbol[])
       }
       current = current + 1;
    }
+   free(token);
+   free(copy);
    return message;
 }
 
@@ -233,8 +245,47 @@ char* parse_method(char line[], const char symbol[])
       }
       current = current + 1;
    }
+   free(copy);
+   free(token);
    return message;
 }
+
+char* find_token(char line[], const char symbol[], const char match[])
+{
+    char *copy = (char *)malloc(strlen(line) + 1);
+    strcpy(copy, line);
+        
+    char *message;
+    char * token = strtok(copy, symbol);
+
+    while( token != NULL ) {
+      
+      //printf("--Token: %s \n", token);
+      
+      if(strlen(match) <= strlen(token))
+      {
+          int match_char = 0;
+          for(int i = 0; i < strlen(match); i++)
+          {
+              if(token[i] == match[i])
+              {
+                  match_char++;
+              }
+          }
+          if(match_char == strlen(match)){
+            message = token;
+            return message;
+          }
+      }      
+      token = strtok(NULL, symbol);
+   }
+   free(copy);
+   free(token);
+   message = "";
+   return message;
+}
+
+
 
 //https://stackoverflow.com/questions/45670369/c-web-server-image-not-showing-up-on-browser
 //http://www.tldp.org/LDP/LG/issue91/tranter.html
@@ -262,17 +313,31 @@ int send_message(int fd, char image_path[], char head[]){
     int block_size = stat_buf.st_blksize;
     //printf("image block size: %d\n", stat_buf.st_blksize);  
     //printf("image total byte st_size: %d\n", stat_buf.st_size);
+    if(fdimg >= 0){
+        ssize_t sent_size;
 
-    while(img_total_size > 0){
-        if(img_total_size < block_size){
-            sendfile(fd, fdimg, NULL, img_total_size);
+        while(img_total_size > 0){
+            //if(img_total_size < block_size){
+             //   sent_size = sendfile(fd, fdimg, NULL, img_total_size);
+            //}
+            //else{
+            //    sent_size = sendfile(fd, fdimg, NULL, block_size);
+            //}          
+            //img_total_size = img_total_size - sent_size;
+        
+            //if(sent_size < 0){
+             //   printf("send file error --> file: %d, send size: %d , error: %s\n", fdimg, sent_size, strerror(errno));
+             //   img_total_size = -1;
+              int send_bytes = ((img_total_size < block_size) ? img_total_size : block_size);
+              int done_bytes = sendfile(fd, fdimg, NULL, block_size);
+              img_total_size = img_total_size - done_bytes;
+            //}
         }
-        else{
-            sendfile(fd, fdimg, NULL, block_size);
-        }       
-        img_total_size = img_total_size - block_size;
+        if(sent_size >= 0){
+            printf("send file: %s \n" , image_path);
+        }
+        close(fdimg);
     }
-    close(fdimg);
 }
 
 /*
