@@ -218,6 +218,9 @@ char* parse(char line[], const char symbol[])
       token = strtok(NULL, " ");
       if(current == 0){
           message = token;
+          if(message == NULL){
+              message = "";
+          }
           return message;
       }
       current = current + 1;
@@ -241,6 +244,9 @@ char* parse_method(char line[], const char symbol[])
       //token = strtok(NULL, " ");
       if(current == 0){
           message = token;
+          if(message == NULL){
+              message = "";
+          }
           return message;
       }
       current = current + 1;
