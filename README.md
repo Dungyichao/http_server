@@ -347,6 +347,41 @@ You might not familiar with the above command, so the following link may help yo
 </table>
 </p>
 
+## 3.5 Create Child Process to Handle Clients
+In a real world server, we are not going to reply all connected client with only one process. Our server program will not have good performance when multiple clients connecting to us at once. So we will create child process whenever new client connected. Please read the tutorial [link](https://www.linuxhowtos.org/C_C++/socket.htm) - Enhancements to the server code part. 
+
+We modifiy a little bit code from the tutorial link. Please see the following. We only shows the while loop part.
+```c++
+while (1)
+ {
+   newsockfd = accept(server_fd,
+               (struct sockaddr *) &cli_addr, &clilen);
+   if (newsockfd < 0)
+     error("ERROR on accept");
+   pid = fork();
+   if (pid < 0){
+     error("ERROR on fork");
+     exit(EXIT_FAILURE);  //We add this part
+    }
+   if (pid == 0)
+   {
+     //close(server_fd);    //We omint this part because it would cause error
+     ......................................
+     This part is parsing the message from client, read path file, write file back to client
+     ...
+     ....
+     .....
+     ......................................
+     close(new_socket);
+     exit(0);
+   }
+   else{
+            printf(">>>>>>>>>>Parent create child with pid: %d <<<<<<<<<", pid);
+            close(new_socket);
+   }
+ } /* end o
+```
+
 # 4. Summary
 This is a simple, experimental but functional Ubuntu web server. Some error protection method not inclue. Any advise are welcome. I also want to implment a <b>webcam</b> server sending real-time streaming. 
 
