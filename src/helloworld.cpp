@@ -40,7 +40,7 @@ char http_header[25] = "HTTP/1.1 200 Ok\r\n";
 
 int main(int argc, char const *argv[])
 {
-    int server_fd, new_socket; 
+    int server_fd, new_socket, pid; 
     long valread;
     struct sockaddr_in address;
     int addrlen = sizeof(address);
@@ -80,127 +80,140 @@ int main(int argc, char const *argv[])
             perror("In accept");
             exit(EXIT_FAILURE);
         }
-        
-        char buffer[30000] = {0};
-        valread = read( new_socket , buffer, 30000);
-
-        printf("\n buffer message: %s \n ", buffer);
-        char *parse_string_method = parse_method(buffer, " ");  //Try to get the path which the client ask for
-        printf("Client method: %s\n", parse_string_method);
-        
-        //char httpHeader1[800021] = "HTTP/1.1 200 OK\r\n\n";
-
-        char *parse_string = parse(buffer, " ");  //Try to get the path which the client ask for
-        printf("Client ask for path: %s\n", parse_string);
-
-        //prevent strtok from changing the string
-        //https://wiki.sei.cmu.edu/confluence/display/c/STR06-C.+Do+not+assume+that+strtok%28%29+leaves+the+parse+string+unchanged
-        //https://stackoverflow.com/questions/5099669/invalid-conversion-from-void-to-char-when-using-malloc/5099675 
-        char *copy = (char *)malloc(strlen(parse_string) + 1);
-        strcpy(copy, parse_string);
-        char *parse_ext = parse(copy, ".");  // get the file extension such as JPG, jpg
-
-        char *copy_head = (char *)malloc(strlen(http_header) +200);
-        strcpy(copy_head, http_header);
-        
-        if(parse_string_method[0] == 'G' && parse_string_method[1] == 'E' && parse_string_method[2] == 'T'){
-            //https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-            if(strlen(parse_string) <= 1){
-                //case that the parse_string = "/"  --> Send index.html file
-                //write(new_socket , httpHeader , strlen(httpHeader));
-                char path_head[500] = ".";
-                strcat(path_head, "/index.html");
-                strcat(copy_head, "Content-Type: text/html\r\n\r\n");
-                send_message(new_socket, path_head, copy_head);
-            }
-            else if ((parse_ext[0] == 'j' && parse_ext[1] == 'p' && parse_ext[2] == 'g') || (parse_ext[0] == 'J' && parse_ext[1] == 'P' && parse_ext[2] == 'G'))
-            {
-                //send image to client
-                char path_head[500] = ".";
-                strcat(path_head, parse_string);
-                strcat(copy_head, "Content-Type: image/jpeg\r\n\r\n");
-                send_message(new_socket, path_head, copy_head);
-            }
-            else if (parse_ext[0] == 'i' && parse_ext[1] == 'c' && parse_ext[2] == 'o')
-            {
-                //https://www.cisco.com/c/en/us/support/docs/security/web-security-appliance/117995-qna-wsa-00.html
-                char path_head[500] = ".";
-                strcat(path_head, "/img/favicon.png");
-                strcat(copy_head, "Content-Type: image/vnd.microsoft.icon\r\n\r\n");
-                send_message(new_socket, path_head, copy_head);
-            }
-            else if (parse_ext[0] == 't' && parse_ext[1] == 't' && parse_ext[2] == 'f')
-            {
-                //font type, to display icon from FontAwesome
-                char path_head[500] = ".";
-                strcat(path_head, parse_string);
-                strcat(copy_head, "Content-Type: font/ttf\r\n\r\n");
-                send_message(new_socket, path_head, copy_head);
-            }
-            else if (parse_ext[strlen(parse_ext)-2] == 'j' && parse_ext[strlen(parse_ext)-1] == 's')
-            {
-                //javascript
-                char path_head[500] = ".";
-                strcat(path_head, parse_string);
-                strcat(copy_head, "Content-Type: text/javascript\r\n\r\n");
-                send_message(new_socket, path_head, copy_head);
-            }
-            else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2] == 's' && parse_ext[strlen(parse_ext)-1] == 's')
-            {
-                //css
-                char path_head[500] = ".";
-                strcat(path_head, parse_string);
-                strcat(copy_head, "Content-Type: text/css\r\n\r\n");
-                send_message(new_socket, path_head, copy_head);
-            }
-            else if (parse_ext[0] == 'w' && parse_ext[1] == 'o' && parse_ext[2] == 'f')
-            {
-                //Web Open Font Format woff and woff2
-                char path_head[500] = ".";
-                strcat(path_head, parse_string);
-                strcat(copy_head, "Content-Type: font/woff\r\n\r\n");
-                send_message(new_socket, path_head, copy_head);
-            }
-            else if (parse_ext[0] == 'm' && parse_ext[1] == '3' && parse_ext[2] == 'u' && parse_ext[3] == '8')
-            {
-                //Web Open m3u8
-                char path_head[500] = ".";
-                strcat(path_head, parse_string);
-                strcat(copy_head, "Content-Type: application/vnd.apple.mpegurl\r\n\r\n");
-                send_message(new_socket, path_head, copy_head);
-            }
-            else if (parse_ext[0] == 't' && parse_ext[1] == 's')
-            {
-                //Web Open ts
-                char path_head[500] = ".";
-                strcat(path_head, parse_string);
-                strcat(copy_head, "Content-Type: video/mp2t\r\n\r\n");
-                send_message(new_socket, path_head, copy_head);
-            }
-            else{
-                //send other file 
-                char path_head[500] = ".";
-                strcat(path_head, parse_string);
-                strcat(copy_head, "Content-Type: text/plain\r\n\r\n");
-                send_message(new_socket, path_head, copy_head);
-                printf("Else: %s \n", parse_string);        
-            }
-            printf("\n------------------Server sent----------------------------------------------------\n");
+        //Create child process to handle request from different client
+        pid = fork();
+        if(pid < 0){
+            perror("Error on fork");
+            exit(EXIT_FAILURE);
         }
-        else if (parse_string_method[0] == 'P' && parse_string_method[1] == 'O' && parse_string_method[2] == 'S' && parse_string_method[3] == 'T'){
-            char *find_string = malloc(200);
-            find_string = find_token(buffer, "\r\n", "action");
-            strcat(copy_head, "Content-Type: text/plain \r\n\r\n"); //\r\n\r\n
-            //strcat(copy_head, "Content-Length: 12 \n");
-            strcat(copy_head, "User Action: ");
-            printf("find string: %s \n", find_string);
-            strcat(copy_head, find_string);
-            write(new_socket, copy_head, strlen(copy_head));
+        
+        if(pid == 0){
+            char buffer[30000] = {0};
+            valread = read( new_socket , buffer, 30000);
+
+            printf("\n buffer message: %s \n ", buffer);
+            char *parse_string_method = parse_method(buffer, " ");  //Try to get the path which the client ask for
+            printf("Client method: %s\n", parse_string_method);
+
+            //char httpHeader1[800021] = "HTTP/1.1 200 OK\r\n\n";
+
+            char *parse_string = parse(buffer, " ");  //Try to get the path which the client ask for
+            printf("Client ask for path: %s\n", parse_string);
+
+            //prevent strtok from changing the string
+            //https://wiki.sei.cmu.edu/confluence/display/c/STR06-C.+Do+not+assume+that+strtok%28%29+leaves+the+parse+string+unchanged
+            //https://stackoverflow.com/questions/5099669/invalid-conversion-from-void-to-char-when-using-malloc/5099675 
+            char *copy = (char *)malloc(strlen(parse_string) + 1);
+            strcpy(copy, parse_string);
+            char *parse_ext = parse(copy, ".");  // get the file extension such as JPG, jpg
+
+            char *copy_head = (char *)malloc(strlen(http_header) +200);
+            strcpy(copy_head, http_header);
+
+            if(parse_string_method[0] == 'G' && parse_string_method[1] == 'E' && parse_string_method[2] == 'T'){
+                //https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+                if(strlen(parse_string) <= 1){
+                    //case that the parse_string = "/"  --> Send index.html file
+                    //write(new_socket , httpHeader , strlen(httpHeader));
+                    char path_head[500] = ".";
+                    strcat(path_head, "/index.html");
+                    strcat(copy_head, "Content-Type: text/html\r\n\r\n");
+                    send_message(new_socket, path_head, copy_head);
+                }
+                else if ((parse_ext[0] == 'j' && parse_ext[1] == 'p' && parse_ext[2] == 'g') || (parse_ext[0] == 'J' && parse_ext[1] == 'P' && parse_ext[2] == 'G'))
+                {
+                    //send image to client
+                    char path_head[500] = ".";
+                    strcat(path_head, parse_string);
+                    strcat(copy_head, "Content-Type: image/jpeg\r\n\r\n");
+                    send_message(new_socket, path_head, copy_head);
+                }
+                else if (parse_ext[0] == 'i' && parse_ext[1] == 'c' && parse_ext[2] == 'o')
+                {
+                    //https://www.cisco.com/c/en/us/support/docs/security/web-security-appliance/117995-qna-wsa-00.html
+                    char path_head[500] = ".";
+                    strcat(path_head, "/img/favicon.png");
+                    strcat(copy_head, "Content-Type: image/vnd.microsoft.icon\r\n\r\n");
+                    send_message(new_socket, path_head, copy_head);
+                }
+                else if (parse_ext[0] == 't' && parse_ext[1] == 't' && parse_ext[2] == 'f')
+                {
+                    //font type, to display icon from FontAwesome
+                    char path_head[500] = ".";
+                    strcat(path_head, parse_string);
+                    strcat(copy_head, "Content-Type: font/ttf\r\n\r\n");
+                    send_message(new_socket, path_head, copy_head);
+                }
+                else if (parse_ext[strlen(parse_ext)-2] == 'j' && parse_ext[strlen(parse_ext)-1] == 's')
+                {
+                    //javascript
+                    char path_head[500] = ".";
+                    strcat(path_head, parse_string);
+                    strcat(copy_head, "Content-Type: text/javascript\r\n\r\n");
+                    send_message(new_socket, path_head, copy_head);
+                }
+                else if (parse_ext[strlen(parse_ext)-3] == 'c' && parse_ext[strlen(parse_ext)-2] == 's' && parse_ext[strlen(parse_ext)-1] == 's')
+                {
+                    //css
+                    char path_head[500] = ".";
+                    strcat(path_head, parse_string);
+                    strcat(copy_head, "Content-Type: text/css\r\n\r\n");
+                    send_message(new_socket, path_head, copy_head);
+                }
+                else if (parse_ext[0] == 'w' && parse_ext[1] == 'o' && parse_ext[2] == 'f')
+                {
+                    //Web Open Font Format woff and woff2
+                    char path_head[500] = ".";
+                    strcat(path_head, parse_string);
+                    strcat(copy_head, "Content-Type: font/woff\r\n\r\n");
+                    send_message(new_socket, path_head, copy_head);
+                }
+                else if (parse_ext[0] == 'm' && parse_ext[1] == '3' && parse_ext[2] == 'u' && parse_ext[3] == '8')
+                {
+                    //Web Open m3u8
+                    char path_head[500] = ".";
+                    strcat(path_head, parse_string);
+                    strcat(copy_head, "Content-Type: application/vnd.apple.mpegurl\r\n\r\n");
+                    send_message(new_socket, path_head, copy_head);
+                }
+                else if (parse_ext[0] == 't' && parse_ext[1] == 's')
+                {
+                    //Web Open ts
+                    char path_head[500] = ".";
+                    strcat(path_head, parse_string);
+                    strcat(copy_head, "Content-Type: video/mp2t\r\n\r\n");
+                    send_message(new_socket, path_head, copy_head);
+                }
+                else{
+                    //send other file 
+                    char path_head[500] = ".";
+                    strcat(path_head, parse_string);
+                    strcat(copy_head, "Content-Type: text/plain\r\n\r\n");
+                    send_message(new_socket, path_head, copy_head);
+                    printf("Else: %s \n", parse_string);        
+                }
+                printf("\n------------------Server sent----------------------------------------------------\n");
+            }
+            else if (parse_string_method[0] == 'P' && parse_string_method[1] == 'O' && parse_string_method[2] == 'S' && parse_string_method[3] == 'T'){
+                char *find_string = malloc(200);
+                find_string = find_token(buffer, "\r\n", "action");
+                strcat(copy_head, "Content-Type: text/plain \r\n\r\n"); //\r\n\r\n
+                //strcat(copy_head, "Content-Length: 12 \n");
+                strcat(copy_head, "User Action: ");
+                printf("find string: %s \n", find_string);
+                strcat(copy_head, find_string);
+                write(new_socket, copy_head, strlen(copy_head));
+            }
+            close(new_socket);
+            free(copy);
+            free(copy_head);  
         }
-        close(new_socket);
-        free(copy);
-        free(copy_head);  
+        else{
+            printf(">>>>>>>>>>Parent create child with pid: %d <<<<<<<<<", pid);
+            close(new_socket);
+        }
     }
+    close(server_fd);
     return 0;
 }
 
