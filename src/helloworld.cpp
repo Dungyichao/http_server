@@ -34,6 +34,7 @@ int send_image(int & fd, std::string& image);*/
 
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
 //https://stackoverflow.com/questions/45670369/c-web-server-image-not-showing-up-on-browser
+//https://www.linuxhowtos.org/C_C++/socket.htm
 
 char http_header[25] = "HTTP/1.1 200 Ok\r\n";
 
