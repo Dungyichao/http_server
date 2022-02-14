@@ -480,7 +480,7 @@ The following are some most common streaming protocols and most widely used in c
 
 ## 5.1 HTTP Live Streaming (HLS)
 Reference link: <br />
-https://www.cloudflare.com/learning/video/what-is-http-live-streaming/
+https://www.cloudflare.com/learning/video/what-is-http-live-streaming/ <br />
 https://www.dacast.com/blog/hls-streaming-protocol/
 
 Streaming is a way of delivering visual and audio media to users over the Internet. It works by continually sending the media file to a user's device a little bit at a time instead of all at once. With streaming over HTTP, the standard request-response pattern does not apply. <b>The connection between client and server remains open for the duration of the stream</b>, and the server pushes video data to the client so that the client does not have to request every segment of video data. HLS use TCP (more reliable) rather than UDP (more faster) as trasport protocols. 
