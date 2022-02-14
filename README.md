@@ -494,11 +494,74 @@ There are two way to do this project. Please go to the following [link1]( https:
 <p align="center">
 <img src="/img/rapivid_method.JPG" height="95%" width="95%">  
 </p>
-Rapivid can output segment video files in local folder, however, in option 1, when stdout pipe into GStreamer to generate streaming files, it’s .ts file keep growing which never split into segment. It only generate .m3u8 playlist file when you stop the process. It requires to go through Nginx with rtmp sink to generate proper segment .ts files with playlist .m3u8. So we change to the option 2, which use ffmpeg to generate proper segment .ts files with playlist .m3u8. Finally, we can use our handmade http server to send out the .m3u8 and .ts files from local folder to the client browser for streaming. We shows the steps for option 2 below.
+Rapivid can output segment video files in local folder, however, in option 1, when stdout pipe into GStreamer to generate streaming files, it’s .ts file keep growing which never split into segment. It only generate .m3u8 playlist file when you stop the process. It requires to go through Nginx with rtmp sink to generate proper segment .ts files with playlist .m3u8. So we change to the option 2, which use ffmpeg to generate proper segment .ts files with playlist .m3u8. Finally, we can use our handmade http server to send out the .m3u8 and .ts files from local folder to the client browser for streaming. We shows the steps for option 2 below. <\br>
 
 First we create the bash file
 ```bash
 $ sudo nano /usr/local/bin/ffmpeg-rpi-stream
 ```
+Place the following into /usr/local/bin/ffmpeg-rpi-stream. Make it executable. Make sure your http server can access the video location (in the base option)
+```bash
+#!/bin/bash
+# /usr/local/bin/gst-rpi-stream
+base="/home/pi/Desktop/http/video"     
+cd $base
+
+raspivid -ih -t 0 -b 2097152 -w 1280 -h 720 -fps 30 -n -o - | \
+ffmpeg -y \
+   -use_wallclock_as_timestamps 1 \   #fix error: ffmpeg timestamps are unset in a packet for stream0. 
+    -i - \
+    -c:v copy \
+    -map 0 \
+    -f ssegment \
+    -segment_time 1 \
+    -segment_wrap 4 \
+    -segment_format mpegts \
+    -segment_list "$base/s.m3u8" \
+    -segment_list_size 1 \
+    -segment_list_flags live \
+    -segment_list_type m3u8 \
+    "$base/s_%08d.ts"
+
+```
+The following table shows how your configuration would affect the streaming latency time.
+<p align="center">
+<table>
+    <thead>
+        <tr>
+            <th align="center">Segment_time</th>
+            <th align="center">Segment_wrap</th>
+            <th align="center">Segment_List_Size</th>
+            <th align="center">Latency</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">1</td>
+            <td align="center">2~20</td>
+            <td align="center">1</td>
+            <td align="center">3s ~ 5s</td>
+        </tr>
+        <tr>
+            <td align="center">1</td>
+            <td align="center">4</td>
+            <td align="center">2</td>
+            <td align="center">5s</td>
+        </tr>
+        <tr>
+            <td align="center">1</td>
+            <td align="center">20</td>
+            <td align="center">2</td>
+            <td align="center">6s</td>
+        </tr>
+        <tr>
+            <td align="center">1</td>
+            <td align="center">20</td>
+            <td align="center">5</td>
+            <td align="center">9s</td>
+        </tr>
+    </tbody>
+</table>
+</p>
 
 ## 5.2 MJPEG
