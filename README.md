@@ -21,6 +21,7 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
 --------------Advance----------------
 
 5. HTTP Live Streaming (HLS)
+6. MJPEG Streaming
 
 # 1. Basic Knowledge <br />
 In the internet world, there is always a server who can serve multiple clients. For example, Google, Netflix, Facebook... and so on are servers. People like us are client and we can use web browser (Chrome, Edge, Opera, Firefox....) to communicate with servers. <br />
@@ -507,6 +508,3 @@ Streaming is a way of delivering visual and audio media to users over the Intern
     </tbody>
 </table>
 </p>
-
-### 5.1.2 Bitrate Streaming
-This refers to the ability to adjust video quality in the middle of a stream as network conditions change. This ability allows videos to keep playing even if network conditions get worse; conversely, it also maximizes video quality to be as high as the network can support. Adaptive bitrate streaming is possible because HLS creates several duplicate segmented streams at different quality levels during the segmentation process. 
