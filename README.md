@@ -500,10 +500,10 @@ First we create the bash file
 ```bash
 $ sudo nano /usr/local/bin/ffmpeg-rpi-stream
 ```
-Place the following into /usr/local/bin/ffmpeg-rpi-stream. Make it executable. Make sure your http server can access the video location (in the base option)
+Place the following into /usr/local/bin/ffmpeg-rpi-stream. Make it executable. Make sure your http server can access the video location (in the base option). Best way is to put handmade http server, index.html, and these .m3u8, .ts file into same location.
 ```bash
 #!/bin/bash
-# /usr/local/bin/gst-rpi-stream
+# /usr/local/bin/ffmpeg-rpi-stream
 base="/home/pi/Desktop/http/video"     
 cd $base
 
@@ -538,7 +538,7 @@ The following table shows how your configuration would affect the streaming late
     <tbody>
         <tr>
             <td align="center">1</td>
-            <td align="center">2~20</td>
+            <td align="center">2 ~ 20</td>
             <td align="center">1</td>
             <td align="center">3s ~ 5s</td>
         </tr>
@@ -557,11 +557,66 @@ The following table shows how your configuration would affect the streaming late
         <tr>
             <td align="center">1</td>
             <td align="center">20</td>
-            <td align="center">5</td>
+            <td align="center">5 ~ 10</td>
             <td align="center">9s</td>
+        </tr>
+        <tr>
+            <td align="center">2</td>
+            <td align="center">4</td>
+            <td align="center">1</td>
+            <td align="center">3s ~ 4s</td>
+        </tr>
+        <tr>
+            <td align="center">4</td>
+            <td align="center">4</td>
+            <td align="center">1</td>
+            <td align="center">7s ~ 8s</td>
+        </tr>
+        <tr>
+            <td align="center">4</td>
+            <td align="center">4</td>
+            <td align="center">2</td>
+            <td align="center">11s</td>
         </tr>
     </tbody>
 </table>
 </p>
 
+Make it executable:
+```bash
+$sudo chmod +x /usr/local/bin/ffmpeg-rpi-stream
+```
+We will create a systemd unit file to manage the gstreamer process. We'll configure it to automatically restart the stream if it goes down.
+```bash
+$sudo nano /lib/systemd/system/ffmpeg-rpi-stream.service
+```
+Place the following into /lib/systemd/system/ffmpeg-rpi-stream.service
+```bash
+[Unit]
+Description=RPI FFMpeg RTMP Source
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ffmpeg-rpi-stream
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+```
+Enable and start the service:
+```bash
+$sudo systemctl daemon-reload
+$sudo systemctl enable ffmpeg-rpi-stream
+$sudo systemctl start ffmpeg-rpi-stream
+```
+Now, you can use browser to watch the stream of the raspberry pi camera. 
+If want to stop streaming camera service
+```bash
+$ ps aux
+```
+Find the PID (raspivid task)
+```bash
+$sudo kill -9 <pid>
+```
 ## 5.2 MJPEG
