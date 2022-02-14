@@ -479,7 +479,7 @@ The following are some most common streaming protocols and most widely used in c
 </p>
 
 ## 5.1 HTTP Live Streaming (HLS)
-Reference link: <\br>
+Reference link: <br />
 https://www.cloudflare.com/learning/video/what-is-http-live-streaming/
 https://www.dacast.com/blog/hls-streaming-protocol/
 
@@ -494,7 +494,7 @@ There are two way to do this project. Please go to the following [link1]( https:
 <p align="center">
 <img src="/img/rapivid_method.JPG" height="95%" width="95%">  
 </p>
-Rapivid can output segment video files in local folder, however, in option 1, when stdout pipe into GStreamer to generate streaming files, it’s .ts file keep growing which never split into segment. It only generate .m3u8 playlist file when you stop the process. It requires to go through Nginx with rtmp sink to generate proper segment .ts files with playlist .m3u8. So we change to the option 2, which use ffmpeg to generate proper segment .ts files with playlist .m3u8. Finally, we can use our handmade http server to send out the .m3u8 and .ts files from local folder to the client browser for streaming. We shows the steps for option 2 below. <\br>
+Rapivid can output segment video files in local folder, however, in option 1, when stdout pipe into GStreamer to generate streaming files, it’s .ts file keep growing which never split into segment. It only generate .m3u8 playlist file when you stop the process. It requires to go through Nginx with rtmp sink to generate proper segment .ts files with playlist .m3u8. So we change to the option 2, which use ffmpeg to generate proper segment .ts files with playlist .m3u8. Finally, we can use our handmade http server to send out the .m3u8 and .ts files from local folder to the client browser for streaming. We shows the steps for option 2 below. <br />
 
 First we create the bash file
 ```bash
