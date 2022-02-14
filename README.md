@@ -490,9 +490,10 @@ First, the HLS protocol chops up MP4 video content into short (10-second) chunks
 HLS is compatible with a wide range of devices and firewalls. However, latency (or lag time) tends to be in the 15-30 second range with HLS live streams. 
 
 ### 5.1.1 HLS Streaming Project
-There are two way to do this project. Please go to the following [link]( https://five381.com/blog/2020-03/rpi-camera-rtmp-streaming/) and follow the instructions. 
+There are two way to do this project. Please go to the following [link1]( https://five381.com/blog/2020-03/rpi-camera-rtmp-streaming/) and follow the instructions.
 <p align="center">
 <img src="/img/rapivid_method.JPG" height="95%" width="95%">  
 </p>
+Rapivid can output segment video files in local folder, however, in option 1, when stdout pipe into GStreamer to generate streaming files, it’s .ts file keep growing which never split into segment. It only generate .m3u8 playlist file when you stop the process. It requires to go through Nginx with rtmp sink to generate proper segment .ts files with playlist .m3u8. So we change to the option 2, which use ffmpeg to generate proper segment .ts files with playlist .m3u8.
 
 ## 5.2 MJPEG
