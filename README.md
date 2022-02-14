@@ -487,7 +487,12 @@ Streaming is a way of delivering visual and audio media to users over the Intern
 
 First, the HLS protocol chops up MP4 video content into short (10-second) chunks with the .ts file extension (MPEG2 Transport Stream). Next, an HTTP server stores those streams, and HTTP delivers these short clips to viewers on their devices. Some software server creates an M3U8 playlist file (e.g. manifest file) that serves as an index for the video chunks. 
 
+HLS is compatible with a wide range of devices and firewalls. However, latency (or lag time) tends to be in the 15-30 second range with HLS live streams. 
+
 ### 5.1.1 HLS Streaming Project
-Reference: 
+There are two way to do this project. Please go to the following [link]( https://five381.com/blog/2020-03/rpi-camera-rtmp-streaming/) and follow the instructions. 
+<p align="center">
+<img src="/img/rapivid_method.JPG" height="95%" width="95%">  
+</p>
 
 ## 5.2 MJPEG
