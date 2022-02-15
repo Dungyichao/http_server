@@ -623,7 +623,7 @@ HLS is not a good idea for real-time streaming robot project. The latency is not
 ### 5.2.1 MJPEG Streaming Project
 Let's take a look at the system structure of StreamEye. Python will be used to capture JPEG image file, and then output to StreamEye.o for further processing, and then act as a http server waiting client to connect and reply with a series of JPEG data.
 <p align="center">
-<img src="/img/streameye_system.JPG" height="95%" width="95%">  
+<img src="/img/streameye_system.JPG" height="75%" width="75%">  
 </p>
 
 
