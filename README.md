@@ -351,7 +351,7 @@ You might not familiar with the above command, so the following link may help yo
 </p>
 
 ## 3.5 Create Child Process to Handle Clients
-In a real world server, we are not going to reply all connected client with only one process. Our server program will not have good performance when multiple clients connecting to us at once. So we will create child process whenever new client connected. Please read the tutorial [link](https://www.linuxhowtos.org/C_C++/socket.htm) - Enhancements to the server code part. 
+In a real world server, we are not going to reply all connected client with only one process. Our server program will not have good performance when multiple clients connecting to us at once. So we will create child process whenever new client connected. Please read the tutorial [link](https://www.linuxhowtos.org/C_C++/socket.htm) ([PDF](https://github.com/Dungyichao/http_server/blob/master/doc/Sockets%20Tutorial.pdf)) - Enhancements to the server code part. 
 
 We modifiy a little bit code from the tutorial link. Please see the following. We only shows the while loop part.
 ```c++
