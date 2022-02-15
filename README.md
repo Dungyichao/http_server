@@ -19,7 +19,9 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
 4. [Summary (with javascript)](https://github.com/Dungyichao/http_server/blob/master/README.md#4-summary)
 5. [Video Streaming Protocols](https://github.com/Dungyichao/http_server/blob/master/README.md#3-implement-the-code)
     * 5.1 [HTTP Live Streaming (HLS)](https://github.com/Dungyichao/http_server/blob/master/README.md#51-http-live-streaming-hls)
+        - 5.1.1 [HLS Streaming Project](https://github.com/Dungyichao/http_server/blob/master/README.md#511-hls-streaming-project)
     * 5.2 [MJPEG Streaming](https://github.com/Dungyichao/http_server/blob/master/README.md#52-mjpeg)
+        - 5.2.1 [MJPEG Streaming Project](https://github.com/Dungyichao/http_server/blob/master/README.md#521-mjpeg-streaming-project)
 
 
 # 1. Basic Knowledge <br />
