@@ -524,7 +524,7 @@ ffmpeg -y \
     "$base/s_%08d.ts"
 
 ```
-The following table shows how your configuration would affect the streaming latency time in our project. Segment_wrap means how many .ts file will be kept. Segment_List_Size means how many .ts records will be kept in the .m3u8 which will affact client playback. Segment_wrap should be larger or equal to Segment_List_Size.
+The following table shows how your configuration would affect the streaming latency time in our project. 
 <p align="center">
 <table>
     <thead>
@@ -581,6 +581,8 @@ The following table shows how your configuration would affect the streaming late
     </tbody>
 </table>
 </p>
+
+Segment_time means how long the .ts file (video length). Segment_wrap means how many .ts file will be kept. Segment_List_Size means how many .ts records will be kept in the .m3u8 which will affact client playback. Segment_wrap should be larger or equal to Segment_List_Size.
 
 Make it executable:
 ```bash
