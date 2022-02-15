@@ -628,6 +628,7 @@ Let's take a look at the system structure of StreamEye. Python will be used to c
 I modify the code from StreamEye and make it more simpler so that we can have a better thought of the concept.
 
 The following is the python code which use picamera library to capture image from camera.
+```rasp_test.py```
 ```python
 import io
 import picamera
