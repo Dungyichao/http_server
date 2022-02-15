@@ -618,4 +618,9 @@ Find the PID (raspivid task)
 $sudo kill -9 <pid>
 ```
 ## 5.2 MJPEG
-HLS is not a good idea for real-time streaming robot project. The latency is not acceptable if you try to remote control your robot.
+HLS is not a good idea for real-time streaming robot project. The latency is not acceptable if you try to remote control your robot. Therefore, we need someting more real time. MJPEG should be able to meet our requirement. MJPEG is mearly s series of JPEG files. A great open source project using C language called streamEye([link](https://github.com/ccrisan/streameye)), and an online tutorial using Python language ([link](https://randomnerdtutorials.com/video-streaming-with-raspberry-pi-camera/))  are a good starting point. 
+
+### 5.2.1 MJPEG Streaming Project
+
+
+
