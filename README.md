@@ -645,3 +645,5 @@ Notice that, in test001.c, we've defined the port to 8084, so you can now open w
 <img src="/img/mjpeg-stream.gif" height="90%" width="90%">  
 </p>
 
+I made a document of my troubleshooting process and answer in this ([link](https://github.com/Dungyichao/http_server/blob/master/Project/simple_streameye/Problem%20and%20answer.docx))
+
