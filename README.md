@@ -628,34 +628,16 @@ Let's take a look at the system structure of StreamEye. Python will be used to c
 I modify the Python, and C code from StreamEye and make it more simpler (less user option, less function) so that we can have a better understanding of the concept.<br />
 <br />
 
-The following is the python code which use picamera library to capture image from camera.
-```rasp_test.py```
-```python
-import io
-import picamera
-import sys
-
-running = True
-
-if sys.version_info.major >= 3:
-    my_stdout = sys.stdout.buffer
-else:
-    my_stdout = sys.stdout
-
-def streams_iter():
-    while running:
-        yield my_stdout
-        sys.stdout.flush()
-           
-with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
-    #Uncomment the next line to change your Pi's Camera rotation (in degrees)
-    #camera.rotation = 90
-    try:
-        camera.capture_sequence(streams_iter(), format='jpeg', use_video_port= True, thumbnail=None, quality=50)
-    except IOError as e:
-        sys.stdout.close()
-        print('Python Error !! >>>>>>>')
+Please go to Project folder ([link](https://github.com/Dungyichao/http_server/tree/master/Project/simple_streameye)) and download ```rasp_test.py``` and ```test001.c``` and put in whatever your project folder in rasperrypi. Use Geany to open test001.c, click on Set Build Command and input like the following
+<p align="center">
+<img src="/img/set_build_command.JPG" height="50%" width="50%">  
+</p>
+Click on build. After successfully building the c code, open command prompt, cd to your project folder, enter the following command
+```bash
+$ python rasp_test.py | ./test001
 ```
+Notice that, in test001.c, we've defined the port to 8084, so you can now open web broswer on other PC (in the same network as raspberrypi) and enter address. In my case, my raspberrypi IP is 172.16.216.206, so I put 172.16.216.206:8084 in my web browser to see the stream.
+
 
 <p align="center">
 <img src="/img/mjpeg-stream.gif" height="90%" width="90%">  
