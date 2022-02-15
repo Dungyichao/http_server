@@ -656,4 +656,7 @@ with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
         print('Python Error !! >>>>>>>')
 ```
 
+<p align="center">
+<img src="/img/mjpeg-stream.gif" height="100%" width="100%">  
+</p>
 
