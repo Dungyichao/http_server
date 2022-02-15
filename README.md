@@ -633,9 +633,11 @@ Please go to Project folder ([link](https://github.com/Dungyichao/http_server/tr
 <img src="/img/set_build_command.JPG" height="50%" width="50%">  
 </p>
 Click on build. After successfully building the c code, open command prompt, cd to your project folder, enter the following command
+
 ```bash
 $ python rasp_test.py | ./test001
 ```
+
 Notice that, in test001.c, we've defined the port to 8084, so you can now open web broswer on other PC (in the same network as raspberrypi) and enter address. In my case, my raspberrypi IP is 172.16.216.206, so I put 172.16.216.206:8084 in my web browser to see the stream.
 
 
