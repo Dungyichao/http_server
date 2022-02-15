@@ -628,7 +628,7 @@ Let's take a look at the system structure of StreamEye. Python will be used to c
 I modify the Python, and C code from StreamEye and make it more simpler (less user option, less function) so that we can have a better understanding of the concept.<br />
 <br />
 
-Please go to Project folder ([link](https://github.com/Dungyichao/http_server/tree/master/Project/simple_streameye)) and download ```rasp_test.py``` and ```test001.c``` and put in whatever your project folder in rasperrypi. Use Geany to open test001.c, click on Set Build Command and input like the following
+Please go to Project folder ([link](https://github.com/Dungyichao/http_server/tree/master/Project/simple_streameye)) and download ```rasp_test.py``` and ```test001.c``` and put in whatever your project folder in rasperrypi. Use Geany to open test001.c, click on Set Build Command ([reference](https://wiki.geany.org/howtos/configurebuildmenu)) and input like the following
 <p align="center">
 <img src="/img/set_build_command.JPG" height="50%" width="50%">  
 </p>
