@@ -626,7 +626,7 @@ Let's take a look at the system structure of StreamEye. Python will be used to c
 <img src="/img/streameye_system.JPG" height="75%" width="75%">  
 </p>
 I modify the Python, and C code from StreamEye and make it more simpler (less function) so that we can have a better understanding of the concept.<br />
-
+<br />
 
 The following is the python code which use picamera library to capture image from camera.
 ```rasp_test.py```
