@@ -1,0 +1,6 @@
+#To execute the program for streaming
+$ python rasp_test.py | ./test001
+
+#To compile the .c file
+compile: gcc -Wall -c "%f" -lpthread  
+Build: gcc -Wall -o "%e" "%f" -lpthread  
