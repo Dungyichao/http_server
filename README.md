@@ -657,6 +657,6 @@ with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
 ```
 
 <p align="center">
-<img src="/img/mjpeg-stream.gif" height="100%" width="100%">  
+<img src="/img/mjpeg-stream.gif" height="90%" width="90%">  
 </p>
 
