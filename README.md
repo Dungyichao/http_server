@@ -618,3 +618,4 @@ Find the PID (raspivid task)
 $sudo kill -9 <pid>
 ```
 ## 5.2 MJPEG
+HLS is not a good idea for real-time streaming robot project. The latency is not acceptable if you try to remote control your robot.
