@@ -86,7 +86,7 @@ static int read_request(client_t *client);
 int write_to_client(client_t *client, char *buf, int size);
 int write_multipart_header(client_t *client, int jpeg_size);
 int write_response_ok_header(client_t *client);
-int init_server();
+//int init_server();
 void bye_handler(int signal);
 //char *str_timestamp();
 
@@ -718,6 +718,7 @@ int write_response_ok_header(client_t *client) {
     return r;
 }
 
+/*
 int init_server() {
     int socket_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (socket_fd < 0) {
@@ -755,6 +756,7 @@ int init_server() {
     }
     return socket_fd;
 }
+*/
 
 void bye_handler(int signal) {
     if (!running) {
