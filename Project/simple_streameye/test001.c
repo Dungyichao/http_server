@@ -30,7 +30,7 @@
 #include <stdlib.h>   //malloc
 #include <fcntl.h>  //read, fcntl
 
-#include <errno.h>
+#include <errno.h> // header file defines the integer variable errno
 #include <pthread.h>
 #include <sys/time.h>  //gettimeofday
 #include <netinet/in.h>  //INET_ADDRSTRLEN
@@ -179,6 +179,7 @@ int main(int argc, char *argv[])
     }
     
     /* signals */
+    /*	
     struct sigaction act;
     act.sa_handler = bye_handler;
     act.sa_flags = 0;
@@ -192,6 +193,7 @@ int main(int argc, char *argv[])
         //ERRNO("sigaction() failed");
         return -1;
     }
+    */
     if (signal(SIGPIPE, SIG_IGN) == SIG_ERR) {
         //ERRNO("signal() failed");
         return -1;
