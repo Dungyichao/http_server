@@ -650,6 +650,7 @@ Notice that, in test001.c, we've defined the port to 8084, so you can now open w
 <img src="/img/mjpeg-stream.gif" height="90%" width="90%">  
 </p>
 In above GIF, the raspberrypi is connected to WIFI while my PC is wired connect to network hub.
+<br />
 
 I made a document of my troubleshooting process and answer in this ([link](https://github.com/Dungyichao/http_server/blob/master/Project/simple_streameye/Problem%20and%20answer%20-%20StreamEye.docx)) talking about SIGPIPE, EPIPE, errno, nonblocking Socket, pthread, realloc(), pointer arithmetic, MJPEG parsing.
 
