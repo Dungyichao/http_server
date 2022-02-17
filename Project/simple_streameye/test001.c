@@ -634,7 +634,7 @@ int read_request(client_t *client){
 
     //DEBUG_CLIENT(client, "received request header");
 
-    offs = 0;
+    //offs = 0;
     while (running && (line_end = strstr(buf + offs, "\r\n"))) {
         if (offs == 0) { /* first request line */
             found = sscanf(buf, "%9s %1023s %9s", client->method, client->uri, client->http_ver);
