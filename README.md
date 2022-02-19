@@ -656,6 +656,7 @@ If you have other web server servering an index.html which web page contain the 
 ```html
 <img src="http://172.16.216.206:8084/stream.mjpg" width="320" height="240">
 ```
+In my case, I run the web server and streaming server on the same raspberry pi (same ip, but different port). Both program run at the same time. There is no CROS problem because they are in the same domain.
 
 I made a document of my troubleshooting process and answer in this ([link](https://github.com/Dungyichao/http_server/blob/master/Project/simple_streameye/Problem%20and%20answer%20-%20StreamEye%20-%2020220218.pdf)) talking about SIGPIPE, EPIPE, errno, nonblocking Socket, pthread, realloc(), pointer arithmetic, MJPEG parsing.
 
