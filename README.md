@@ -643,7 +643,10 @@ Click on build. After successfully building the c code, open command prompt, cd 
 $ python rasp_test.py | ./test001
 ```
 
-Notice that, in test001.c, we've defined the port to 8084, so you can now open web broswer on other PC (in the same network as raspberrypi) and enter address. In my case, my raspberrypi IP is 172.16.216.206, so I put 172.16.216.206:8084 in my web browser to see the stream.
+Notice that, in test001.c, we've defined the port to 8084, so you can now open web broswer on other PC (in the same network as raspberrypi) and enter address. In my case, my raspberrypi IP is 172.16.216.206, so I put 172.16.216.206:8084 in my web browser to see the stream. If you have other web server servering an index.html which web page contain the MJPEG streaming, you can put the following html tag inside the index.html. 
+```html
+<img src="http://172.16.216.206:8084/stream.mjpg" width="320" height="240">
+```
 
 
 <p align="center">
@@ -652,5 +655,5 @@ Notice that, in test001.c, we've defined the port to 8084, so you can now open w
 In above GIF, the raspberrypi is connected to WIFI while my PC is wired connect to network hub.<br />
 <br />
 
-I made a document of my troubleshooting process and answer in this ([link](https://github.com/Dungyichao/http_server/blob/master/Project/simple_streameye/Problem%20and%20answer%20-%20StreamEye.docx)) talking about SIGPIPE, EPIPE, errno, nonblocking Socket, pthread, realloc(), pointer arithmetic, MJPEG parsing.
+I made a document of my troubleshooting process and answer in this ([link](https://github.com/Dungyichao/http_server/blob/master/Project/simple_streameye/Problem%20and%20answer%20-%20StreamEye%20-%2020220218.pdf)) talking about SIGPIPE, EPIPE, errno, nonblocking Socket, pthread, realloc(), pointer arithmetic, MJPEG parsing.
 
