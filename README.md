@@ -662,5 +662,7 @@ In my case, I run the web server and streaming server on the same raspberry pi (
 I made a document of my troubleshooting process and answer in this ([link](https://github.com/Dungyichao/http_server/blob/master/Project/simple_streameye/Problem%20and%20answer%20-%20StreamEye%20-%2020220218.pdf)) talking about SIGPIPE, EPIPE, errno, nonblocking Socket, pthread, realloc(), pointer arithmetic, MJPEG parsing.
 
 # 6. Advance Topic
+By using our hand made http server, we can implement some interesting project.
+
 ## 6.1 Web Remote Control Robot
 https://github.com/Dungyichao/Web-Remote-Control-Robot
