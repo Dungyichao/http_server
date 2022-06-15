@@ -526,7 +526,7 @@ ffmpeg -y \
     "$base/s_%08d.ts"
 
 ```
-The following table shows how your configuration would affect the streaming latency time in our project. 
+The following table shows how your configuration would affect the streaming latency time in our project. (This table is based on our Raspberry Pi, camera and LAN speed)
 <p align="center">
 <table>
     <thead>
