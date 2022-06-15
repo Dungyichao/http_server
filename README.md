@@ -387,7 +387,7 @@ while (1)
 ```
 
 # 4. Summary
-This is a simple, experimental but functional Ubuntu web server. Some error protection method not inclue. Any advise are welcome. I also want to implment a <b>webcam</b> server sending real-time streaming. 
+This is a simple, experimental but functional Ubuntu web server. Some error protection method not included. Any advise are welcome. I also want to implment a <b>webcam</b> server sending real-time streaming. 
 
 Is there a simple way? Yes, you can use <b>```Node.js```</b> which is a JavaScript runtime environment where you can build a simple web server in about 60 lines of code. (Youtube Node.js Crash Course: https://www.youtube.com/watch?v=fBNz5xF-Kx4)
 ```javascript
