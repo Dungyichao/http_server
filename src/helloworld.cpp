@@ -25,7 +25,7 @@
 char* parse(char line[], const char symbol[]);
 char* parse_method(char line[], const char symbol[]);
 char* find_token(char line[], const char symbol[], const char match[]);
-int send_message(int fd, char image_path[], char head[]);
+void send_message(int fd, char image_path[], char head[]);
 //void setHttpHeader_other(char httpHeader[], char *path);
 //void setHttpHeader(char httpHeader[]);
 //void report(struct sockaddr_in *serverAddress);
@@ -313,7 +313,7 @@ char* find_token(char line[], const char symbol[], const char match[])
 //https://linux.die.net/man/2/fstat
 //http://man7.org/linux/man-pages/man2/stat.2.html
 //http://man7.org/linux/man-pages/man2/sendfile.2.html
-int send_message(int fd, char image_path[], char head[]){
+void send_message(int fd, char image_path[], char head[]){
     /*
     char imageheader[] = 
     "HTTP/1.1 200 Ok\r\n"
