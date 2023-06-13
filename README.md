@@ -29,9 +29,6 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
 # 1. Basic Knowledge <br />
 In the internet world, there is always a server who can serve multiple clients. For example, Google, Netflix, Facebook... and so on are servers. People like us are client and we can use web browser (Chrome, Edge, Opera, Firefox....) to communicate with servers. <br />
 
-<p align="center">
-<img src="/img/server-client-role.JPG" height="100%" width="100%">  
-</p>
 
 You can make a web server at your home and use your own laptop to access the server through LAN which stands for Local Area Network (having a Wi-Fi router can create a LAN at your home). However, if your html file includes some resources in WAN (Wide Area Network), then you need to be able to access the internet for displaying your html correctly.
 
@@ -46,8 +43,8 @@ We are going to implement code for a http server on Ubuntu Desktop. Please follo
 [link](https://github.com/Dungyichao/http_server/blob/master/src/Web_Content_1.zip)
 ). Unzip the content and put all the content into your code project. It will be like the following image. (Notice that we do all the coding and compiling on Ubuntu Desktop)
 
-<p align="center">
-<img src="/img/project_folder.JPG" height="90%" width="90%">  
+<p>
+	<img src="img/project_folder.jpg" height="90%" width="90%">  
 </p>
 
 Copy paste the code provided in this tutorial (
@@ -57,7 +54,7 @@ Copy paste the code provided in this tutorial (
 The local ip address of my web server is 172.16.216.205, Subnet Mask is 255.255.0.0, the default gateway should be the ip address of your router , in our case is 172.16.216.6. <b>Modify these number to fit in your case.</b> If everything is working properly, now you can type in <b>172.16.216.205:8080</b> in the browser on your laptop or cellphone (which should connect to Wi-Fi router at your home). What you see in the browser should be the same as the following animation.
 
 <p align="center">
-<img src="/img/webpagedemo1.gif" height="95%" width="95%">  
+<img src="img/webpagedemo1.gif" height="95%" width="95%">  
 </p>
 
 I made this website (hosted on 
@@ -93,7 +90,7 @@ The following image is basically what we are going to implement in the code. We 
 <br />
 
 <p align="center">
-<img src="/img/process_element1.jpg" height="90%" width="90%">  
+<img src="img/process_element1.jpg" height="90%" width="90%">  
 </p>
 
 The story is, the server keep listening any message it received, then we need to analyze what the useful information in the message by parsing it. The useful information we care about is the file name (with path) and file extension. The server then open the file according to the path and put the content of the file into a reply-message which we will later send to the client. Before sending the reply-message, we should first tell the client what kind of file content type we are going to send, maybe image file (.jpg, .png, ...) or txt file (.html, .doc, ...) and so on (refer to https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types), then we can send the reply-message (content of file) to the client. 
@@ -102,28 +99,28 @@ The story is, the server keep listening any message it received, then we need to
 The overall code can be viewed from the following link: https://github.com/Dungyichao/http_server/blob/master/src/helloworld.cpp
 
 After running the code, and then enter the ip address and port number in the web browser, you will see the following animation in your terminal
-<p align="center">
-<img src="/img/runcode.gif" height="90%" width="90%">  
+<p>
+<img src="img/runcode.gif" height="90%" width="90%">  
 </p>
 
 ## 3.1 Code Structure
 We keep looping through the following code in sequence, namely 1 --> 2 --> 3 --> 4 (a) --> 5 --> 1 --> 2 --> 3 --> 4 (d) --> 5.....  We only focus on number 3 and number 4 and the reply function as well. <br />
 
 <p align="center">
-<img src="/img/code_struct.JPG" height="75%" width="75%">  
+<img src="img\code_struct.JPG" height="90%" width="90%">  
 </p>
 
 ## 3.2 Parse the Request from the Client
 Let's take a look at what the <b>very first</b> request information the client sends to you 
 <p align="center">
-<img src="/img/http_request_0.JPG" height="95%" width="95%">  
+<img src="img\http_request_0.JPG" height="95%" width="95%">  
 </p>
 At first glance, it contains useless information (maybe not true for Hacker), how about we look at the other request information?
 <p align="center">
-<img src="/img/http_request_img.JPG" height="95%" width="95%">  
+<img src="img/http_request_img.JPG" height="20%" width="95%">  
 </p>
 <p align="center">
-<img src="/img/http_request_js.JPG" height="95%" width="95%">  
+<img src="img/http_request_js.JPG" height="95%" width="95%">  
 </p> 
 OK ! I think you nail it. The information between GET and HTTP/1.1. That is the file path which the client requires to display the website correctly on it's browser. <br /><br />
 
@@ -200,7 +197,7 @@ else if (parse_ext[0] == 'i' && parse_ext[1] == 'c' && parse_ext[2] == 'o')
  I know you are still wondering the very first request information I mentioned in section 3.2 which contains ```/``` such a useless information. Actually, it does give us a hint to send it our web page, namely ```index.html```. The client will receive the html file looks like the following
  
  <p align="center">
-<img src="/img/index_html.JPG" height="95%" width="95%">  
+<img src="img/index_html.JPG" height="95%" width="95%">  
 </p>
 
 The client's web browser will read line by line and do whatever the html file tells it. When it reads until line 14 (in above image), the client will send request to the server to ask for ```vendor/fontawesome-free/css/all.min.css``` which is a css file. Server than ```parse``` the request, and then classify the request. 
@@ -215,7 +212,7 @@ You need to replace the ```text/html``` with the proper MIME Type according to t
 
 While writing this tutorial, a special file extension request from the client ```/favicon.ico```, however, I couldn't find out the file in my website at all (I also look into all html, css, js files). It turns out that every browser will automatically request for ```/favicon.ico``` which is merely an icon for displaying on the browser tab shown in the following. So what you need is just reply a .ico or .png file to the client.
  <p align="center">
-<img src="/img/ico.JPG" height="95%" width="95%">  
+<img src="img/ico.JPG" height="95%" width="95%">  
 </p>
 
 Here we list out some common file extension and their MIME Type.
@@ -494,7 +491,7 @@ HLS is compatible with a wide range of devices and firewalls. However, latency (
 ### 5.1.1 HLS Streaming Project
 There are two way to do this project. Please go to the following [link1]( https://five381.com/blog/2020-03/rpi-camera-rtmp-streaming/)([PDF](https://github.com/Dungyichao/http_server/blob/master/doc/STREAMING%20LIVE%20VIDEO%20WITH%20A%20RASPBERRY%20PI%20CAMERA%20OVER%20RTMP.pdf)) and follow the instructions.
 <p align="center">
-<img src="/img/rapivid_method.JPG" height="95%" width="95%">  
+<img src="img/rapivid_method.JPG" height="95%" width="95%">  
 </p>
 Rapivid can output segment video files in local folder, however, in option 1, if not using Nginx, when stdout pipe into GStreamer to generate streaming files, it’s .ts file keep growing which never split into segment. It only generate .m3u8 playlist file when you stop the process. It requires to go through Nginx with rtmp sink to generate proper segment .ts files with playlist .m3u8. So we change to the option 2, which use ffmpeg to generate proper segment .ts files with playlist .m3u8. Finally, we can use our handmade http server to send out the .m3u8 and .ts files from local folder to the client browser for streaming. We shows the steps for option 2 below. <br />
 
@@ -629,14 +626,14 @@ HLS is not a good idea for real-time streaming robot project. The latency is not
 ### 5.2.1 MJPEG Streaming Project
 Let's take a look at the system structure of StreamEye. Python will be used to capture JPEG image file, and then output to StreamEye.o for further processing, and then act as a http server waiting client to connect and reply with a series of JPEG data.
 <p align="center">
-<img src="/img/streameye_system.JPG" height="75%" width="75%">  
+<img src="img/streameye_system.JPG" height="75%" width="75%">  
 </p>
 I modify the Python, and C code from StreamEye and make it more simpler (less user option, less function) so that we can have a better understanding of the concept.<br />
 <br />
 
 Please go to Project folder ([link](https://github.com/Dungyichao/http_server/tree/master/Project/simple_streameye)) and download ```rasp_test.py``` and ```test001.c``` and put in whatever your project folder in rasperrypi. Use Geany to open test001.c, click on Set Build Command ([reference](https://wiki.geany.org/howtos/configurebuildmenu)) and input like the following
 <p align="center">
-<img src="/img/set_build_command.JPG" height="50%" width="50%">  
+<img src="img/set_build_command.JPG" height="50%" width="50%">  
 </p>
 Click on build. After successfully building the c code, open command prompt, cd to your project folder, enter the following command
 
@@ -648,7 +645,7 @@ Notice that, in test001.c, we've defined the port to 8084, so you can now open w
 
 
 <p align="center">
-<img src="/img/mjpeg-stream.gif" height="90%" width="90%">  
+<img src="img/mjpeg-stream.gif" height="90%" width="90%">  
 </p>
 In above GIF, the raspberrypi is connected to WIFI while my PC is wired connect to network hub.<br />
 <br />
