@@ -26,7 +26,8 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
 6. [Advance Topic](https://github.com/Dungyichao/http_server/blob/master/README.md#6-advance-topic)
     * 6.1 [Web Remote Control Robot](https://github.com/Dungyichao/Web-Remote-Control-Robot)
 7. [Make HTML More Organized](https://github.com/Dungyichao/http_server/blob/master/README.md#7-make-html-more-organized)
-    * 7.1 [Implement the Code](https://github.com/Dungyichao/http_server/blob/master/README.md#7-make-html-more-organized)
+    * 7.1 [Implement the Code](https://github.com/Dungyichao/http_server/tree/master#71-implement-the-code)
+    * 7.2 [Bonus: Bingo Game](https://github.com/Dungyichao/http_server/tree/master#71-implement-the-code)
 
 # 1. Basic Knowledge <br />
 In the internet world, there is always a server who can serve multiple clients. For example, Google, Netflix, Facebook... and so on are servers. People like us are client and we can use web browser (Chrome, Edge, Opera, Firefox....) to communicate with servers. <br />
@@ -684,7 +685,7 @@ This is where Javascript function will load child HTML files into this main inde
 <img src="/img/index_head_load.JPG" height="90%" width="90%">  
 </p>
 
-This is where child HTML files content will be loaded and displayed. Because the browser will read line by line, so the order in the following will be reflected on the website. Actually, those div tag just act like a place holder, the browser will literally insert all the loaded HTML code into these place holder (reference by the id).
+This is where child HTML files content will be loaded and displayed. Because the browser will read line by line, so the order in the following will be reflected on the website. Actually, those div tag just act like a place holder, the browser will literally insert all the loaded HTML code into these place holder (reference by the id). However, I cannot move the Navigation bar away to separate HTML file. I do not know the reason and cannot find any solution.
 <p align="center">
 <img src="/img/index_body_div_id.JPG" height="90%" width="90%">  
 </p>
@@ -698,3 +699,26 @@ This is just a regular html code where I remove from original index.html and pas
 <p align="center">
 <img src="/img/video_html.JPG" height="90%" width="90%">  
 </p>
+
+After doing all of this, our web content displayed the same information, but our index.html is more cleaner and more easy to manage. 
+
+## 7.2 Bonus: Bingo Game
+This year 2024, I added another Bingo game which allow user to input their bingo, submit to firebase. The firebase administrator will input the called number online. Use can refresh the browser and see each user's name and their number of lines. 
+
+This is player input page
+<p align="center">
+<img src="/img/Bingo_user_input.JPG" height="90%" width="90%">  
+</p>
+
+This is player score
+<p align="center">
+<img src="/img/Bingo_score.JPG" height="90%" width="90%">  
+</p>
+
+Algorithm to calculate Bingo Game match lines
+```html
+1. create an empty 1-D array which is the same number as player bingo input (m x m)
+2. check player's input, if match, insert 1 into array, otherwise, insert 0 into array
+3. Check row by row, column by column, two diagonal. If line added up to m, player matched line plus one
+4. Continue to check next player
+```
