@@ -669,4 +669,8 @@ By using our hand made http server, we can implement some interesting project.
 https://github.com/Dungyichao/Web-Remote-Control-Robot
 
 # 7. Make HTML More Organized
-Recently, I made a new Bingo game in the website for our company's Chinese New Year, and the code is getting bigger and larger. I can no longer maintain all the code in just one index.html. The idea is to spread all components into different HTML files, and call them in the index.html. 
+Recently, I made a new Bingo game in the website for our company's Chinese New Year, and the code is getting bigger and larger. I can no longer maintain all the code in just one index.html or one javascript file. The idea is to spread all components into different HTML files, and import these html files into the main index.html. From the following picture, you can see I organize HTML, javascript, images, css files into its folders.
+
+<p align="center">
+<img src="/img/organize_html_folders.JPG" height="90%" width="90%">  
+</p>
