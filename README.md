@@ -715,7 +715,7 @@ This is player score
 <img src="/img/Bingo_score.JPG" height="90%" width="90%">  
 </p>
 
-Algorithm to calculate Bingo Game match lines
+Algorithm to calculate Bingo Game match lines. You can find the code implementation in the src/Web_Content_2.zip js folder Refresh_Bingo_Score.js. 
 ```html
 1. create an empty 1-D array which is the same number as player bingo input (m x m)
 2. check player's input, if match, insert 1 into array, otherwise, insert 0 into array
