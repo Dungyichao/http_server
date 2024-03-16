@@ -27,7 +27,7 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
     * 6.1 [Web Remote Control Robot](https://github.com/Dungyichao/Web-Remote-Control-Robot)
 7. [Make HTML More Organized](https://github.com/Dungyichao/http_server/blob/master/README.md#7-make-html-more-organized)
     * 7.1 [Implement the Code](https://github.com/Dungyichao/http_server/tree/master#71-implement-the-code)
-    * 7.2 [Bonus: Bingo Game](https://github.com/Dungyichao/http_server/tree/master#71-implement-the-code)
+    * 7.2 [Bonus: Bingo Game](https://github.com/Dungyichao/http_server/tree/master#72-bonus-bingo-game)
 
 # 1. Basic Knowledge <br />
 In the internet world, there is always a server who can serve multiple clients. For example, Google, Netflix, Facebook... and so on are servers. People like us are client and we can use web browser (Chrome, Edge, Opera, Firefox....) to communicate with servers. <br />
