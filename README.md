@@ -25,7 +25,8 @@ In this tutorial, we will demonstrate how to build a http web server from scratc
         - 5.2.1 [MJPEG Streaming Project](https://github.com/Dungyichao/http_server/blob/master/README.md#521-mjpeg-streaming-project)
 6. [Advance Topic](https://github.com/Dungyichao/http_server/blob/master/README.md#6-advance-topic)
     * 6.1 [Web Remote Control Robot](https://github.com/Dungyichao/Web-Remote-Control-Robot)
-7. [Make HTML More Organized](https://github.com/Dungyichao/http_server/blob/master/README.md#6-advance-topic)
+7. [Make HTML More Organized](https://github.com/Dungyichao/http_server/blob/master/README.md#7-make-html-more-organized)
+    * 7.1 [Implement the Code](https://github.com/Dungyichao/http_server/blob/master/README.md#7-make-html-more-organized)
 
 # 1. Basic Knowledge <br />
 In the internet world, there is always a server who can serve multiple clients. For example, Google, Netflix, Facebook... and so on are servers. People like us are client and we can use web browser (Chrome, Edge, Opera, Firefox....) to communicate with servers. <br />
@@ -674,3 +675,6 @@ Recently, I made a new Bingo game in the website for our company's Chinese New Y
 <p align="center">
 <img src="/img/organize_html_folders.JPG" height="90%" width="90%">  
 </p>
+
+## 7.1 Implement the Code
+You can see the source code in this link
