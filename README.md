@@ -708,6 +708,8 @@ This year 2024, I added another Bingo game which allow user to input their bingo
 Player Input Demo
 https://github.com/Dungyichao/http_server/assets/25232370/b0b9e9f1-f6b0-4c09-9ed1-115a3963c8e9.mp4
 
+https://user-images.githubusercontent.com/25232370/b0b9e9f1-f6b0-4c09-9ed1-115a3963c8e9.mp4
+
 This is player input page
 <p align="center">
 <img src="/img/Bingo_user_input.JPG" height="90%" width="90%">  
