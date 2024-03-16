@@ -688,3 +688,8 @@ This is where child HTML files content will be loaded and displayed. Because the
 <p align="center">
 <img src="/img/index_body_div_id.JPG" height="90%" width="90%">  
 </p>
+
+This is just a regular html code where I remove from original index.html and paste the content into separate html file. The following is just one of the example. You can find the rest in the zip file
+<p align="center">
+<img src="/img/video_html.JPG" height="90%" width="90%">  
+</p>
