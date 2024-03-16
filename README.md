@@ -677,4 +677,14 @@ Recently, I made a new Bingo game in the website for our company's Chinese New Y
 </p>
 
 ## 7.1 Implement the Code
-You can see the source code in this link
+You can see the source code in this link ([link](https://github.com/Dungyichao/http_server/blob/master/src/Web_Content_2.zip)). The rough idea can be shown in the following code
+
+This is where Javascript function will load child HTML files into this main index.html.
+<p align="center">
+<img src="/img/index_head_load.JPG" height="90%" width="90%">  
+</p>
+
+This is where child HTML files content will be loaded and displayed. Because the browser will read line by line, so the order in the following will be reflected on the website. 
+<p align="center">
+<img src="/img/index_body_div_id.JPG" height="90%" width="90%">  
+</p>
