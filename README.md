@@ -684,9 +684,14 @@ This is where Javascript function will load child HTML files into this main inde
 <img src="/img/index_head_load.JPG" height="90%" width="90%">  
 </p>
 
-This is where child HTML files content will be loaded and displayed. Because the browser will read line by line, so the order in the following will be reflected on the website. 
+This is where child HTML files content will be loaded and displayed. Because the browser will read line by line, so the order in the following will be reflected on the website. Actually, those div tag just act like a place holder, the browser will literally insert all the loaded HTML code into these place holder (reference by the id).
 <p align="center">
 <img src="/img/index_body_div_id.JPG" height="90%" width="90%">  
+</p>
+
+This is where the browser will load all Javascript files
+<p align="center">
+<img src="/img/index_body_js.JPG" height="90%" width="90%">  
 </p>
 
 This is just a regular html code where I remove from original index.html and paste the content into separate html file. The following is just one of the example. You can find the rest in the zip file
