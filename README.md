@@ -706,7 +706,7 @@ After doing all of this, our web content displayed the same information, but our
 This year 2024, I added another Bingo game which allow user to input their bingo, submit to firebase. The firebase administrator will input the called number online. Use can refresh the browser and see each user's name and their number of lines. 
 
 Player Input Demo
-https://github.com/Dungyichao/http_server/assets/25232370/b0b9e9f1-f6b0-4c09-9ed1-115a3963c8e9
+https://github.com/Dungyichao/http_server/assets/25232370/b0b9e9f1-f6b0-4c09-9ed1-115a3963c8e9.mp4
 
 This is player input page
 <p align="center">
